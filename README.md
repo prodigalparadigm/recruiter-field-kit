@@ -140,7 +140,13 @@ Fixtures are fed **verbatim**. Expectations live in a sidecar `<fixture>.expecte
 never inside the fixture — a fixture that states its own answers grades its own homework.
 
 Live decodes are recorded to `tests/recorded/` and committed so CI validates the prompt's
-last known-good output without an API key. Tune on Sonnet for speed.
+last known-good output without an API key. Tune on Sonnet for speed, confirm on Opus, and
+keep a prompt change only when both pass.
+
+The two models fail differently, which is the point of checking both: Sonnet holds the
+250-word target for the client email comfortably, Opus runs slightly long every time. A
+change validated against one model hides the other's failure mode — that is how the word
+cap sat mis-tuned to Sonnet for a week without anything catching it.
 
 
 **Each fixture defends one rule** — it exists because it is the case that taught the rule,
