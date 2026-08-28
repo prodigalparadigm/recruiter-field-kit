@@ -1,0 +1,23 @@
+# never commit key material
+*api*.txt
+*.key
+.env
+.env.*
+!tests/fixtures/*.txt
+
+# local tuning output
+scratchpad/
+*_out.json
+*_err.txt
+*.orig
+
+__pycache__/
+*.pyc
+.venv/
+.DS_Store
+
+# tripwire: raw recruiter correspondence is a private test set and lives OUTSIDE
+# this repo (../private_testset/). These patterns catch it if it ever wanders back in.
+sample_jds/
+tests/**/*.pdf
+tests/**/*.docx
