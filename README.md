@@ -140,8 +140,8 @@ Fixtures are fed **verbatim**. Expectations live in a sidecar `<fixture>.expecte
 never inside the fixture — a fixture that states its own answers grades its own homework.
 
 Live decodes are recorded to `tests/recorded/` and committed so CI validates the prompt's
-last known-good output without an API key. Tune on Sonnet for speed, confirm on Opus;
-both must pass before a prompt change is kept.
+last known-good output without an API key. Tune on Sonnet for speed.
+
 
 **Each fixture defends one rule** — it exists because it is the case that taught the rule,
 and its sidecar asserts the thing that would break if the rule eroded:
