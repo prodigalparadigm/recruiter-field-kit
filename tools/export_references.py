@@ -153,7 +153,9 @@ def human(title, rules, gives, feed, nxt, context, report):
             f"*Generated from `tools/probe.py` by `tools/export_references.py` — edit the prompt "
             f"there, not here. The JSON version is in [`json/`](json/).*\n\n"
             f"---\n\nCopy everything below into Claude, then paste your material under it.\n\n"
-            f"```\n{body}\n\nReturn a readable markdown report in exactly this shape. "
+            f"```\nEstablish today's date before you begin, and state it. Several rules below turn on "
+            f"how long a technology has existed or whether a date is past or future, and guessing the "
+            f"date from memory gets those wrong. If you cannot establish it, ask.\n\n{body}\n\nReturn a readable markdown report in exactly this shape. "
             f"No JSON, no preamble.\n\n{report}\n```\n")
 
 

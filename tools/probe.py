@@ -19,7 +19,7 @@ runs -- so the analysis pass runs N times (default 3) and the majority count win
 Fixtures are fed VERBATIM; expectations live in a sidecar <fixture>.expected.json.
 Network: Anthropic API only. This kit never makes a network call to LinkedIn.
 """
-import json, os, re, sys
+import datetime, json, os, re, sys
 from collections import Counter
 from concurrent.futures import ThreadPoolExecutor
 
@@ -287,7 +287,7 @@ def source(jd_text, analysis, model, attempts=3):
     """Search strategy, validated. A string that does not parse wastes a search the
     recruiter cannot get back, so failures are fed back and the pass re-runs rather than
     handing over something broken."""
-    base = (SOURCE_RULES + "\n\n--- JOB DESCRIPTION AS RECEIVED ---\n" + jd_text.strip()
+    base = (dated(SOURCE_RULES) + "\n\n--- JOB DESCRIPTION AS RECEIVED ---\n" + jd_text.strip()
             + "\n--- END ---\n\n--- DECODE (settled) ---\n"
             + json.dumps({k: v for k, v in analysis.items() if k != "_meta"}, indent=2)
             + "\n--- END ---\n")
@@ -480,7 +480,7 @@ Return ONE JSON object and nothing else:
 
 
 def _with_decode(rules, jd_text, analysis, person, person_label):
-    return (rules + "\n\n--- JOB DESCRIPTION AS RECEIVED ---\n" + jd_text.strip()
+    return (dated(rules) + "\n\n--- JOB DESCRIPTION AS RECEIVED ---\n" + jd_text.strip()
             + "\n--- END ---\n\n--- DECODE (settled) ---\n"
             + json.dumps({k: v for k, v in analysis.items() if k != "_meta"}, indent=2)
             + f"\n--- END ---\n\n--- {person_label} (pasted by a human, not fetched) ---\n"
@@ -630,7 +630,7 @@ def receipts(user, model, token=None, top_n=10):
         return facts
     if not facts.get("repos"):
         return facts
-    prompt = (RECEIPTS_RULES + "\n\n--- FACTS FROM GITHUB'S PUBLIC API ---\n"
+    prompt = (dated(RECEIPTS_RULES) + "\n\n--- FACTS FROM GITHUB'S PUBLIC API ---\n"
               + json.dumps(facts, indent=2)[:60000] + "\n--- END ---\n")
     out = _call(prompt, model)
     out["facts"] = facts
@@ -743,12 +743,24 @@ GATE = re.compile(r"\b(approv\w*|review\w*|sign-?off|control|permission|policy|a
                   r"sponsor|veto|said no|turned it down|pushed back|escalat\w*|"
                   r"objection\w*|funding|budget|killed|paused|cut)\b", re.I)
 
+def today():
+    """Every pass needs to know what 'now' is. Rule 6 asks how long a technology has
+    existed, and a model guessing the date from training data will get that wrong -- it
+    flagged a just-completed engagement as future-dated because it thought the year was
+    earlier than it is."""
+    return datetime.date.today().isoformat()
+
+
+def dated(prompt):
+    return f"Today's date is {today()}. Use it for any judgement about how long something has existed, whether a date is past or future, or how current a claim is. Do not infer the date from anything else.\n\n" + prompt
+
+
 DEFAULT_MODEL = "claude-sonnet-5"
 DEFAULT_VOTES = 3
 
 
 def build_prompt(jd_text):
-    return ANALYSE_RULES + "\n\n--- JOB DESCRIPTION AS RECEIVED ---\n" + jd_text.strip() + "\n--- END ---\n"
+    return dated(ANALYSE_RULES) + "\n\n--- JOB DESCRIPTION AS RECEIVED ---\n" + jd_text.strip() + "\n--- END ---\n"
 
 
 def _call(prompt, model, attempts=3):
@@ -786,7 +798,7 @@ def analyse(jd_text, model):
 
 
 def compose(jd_text, analysis, model):
-    p = (COMPOSE_RULES + "\n\n--- JOB DESCRIPTION AS RECEIVED ---\n" + jd_text.strip()
+    p = (dated(COMPOSE_RULES) + "\n\n--- JOB DESCRIPTION AS RECEIVED ---\n" + jd_text.strip()
          + "\n--- END ---\n\n--- ANALYSIS (settled) ---\n"
          + json.dumps(analysis, indent=2) + "\n--- END ---\n")
     return _call(p, model)

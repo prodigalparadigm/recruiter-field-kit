@@ -15,6 +15,8 @@
 Copy everything below into Claude, then paste your material under it.
 
 ```
+Establish today's date before you begin, and state it. Several rules below turn on how long a technology has existed or whether a date is past or future, and guessing the date from memory gets those wrong. If you cannot establish it, ask.
+
 You write the two client-facing pieces of a job-description decode, from an
 analysis another pass has already done. The analysis is settled: do not re-argue the
 verdict, do not add roles, do not soften anything. You may NOT re-rank the skills: anything

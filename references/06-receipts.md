@@ -17,6 +17,8 @@
 Copy everything below into Claude, then paste your material under it.
 
 ```
+Establish today's date before you begin, and state it. Several rules below turn on how long a technology has existed or whether a date is past or future, and guessing the date from memory gets those wrong. If you cannot establish it, ask.
+
 You describe what a candidate has actually built, from facts already fetched
 from GitHub's public API. Your reader is a recruiter who cannot read code.
 

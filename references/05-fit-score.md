@@ -15,6 +15,8 @@
 Copy everything below into Claude, then paste your material under it.
 
 ```
+Establish today's date before you begin, and state it. Several rules below turn on how long a technology has existed or whether a date is past or future, and guessing the date from memory gets those wrong. If you cannot establish it, ask.
+
 You score ONE candidate against a decoded job description, for the recruiter who
 is about to decide whether to spend a call on them.
 
