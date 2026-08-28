@@ -213,6 +213,150 @@ Produce 3 to 6 questions. Check the fix's word count before you answer; the cap 
 If sanity.verdict is "makes_sense", do NOT use the ranked bar -- write the short honest
 note instead. Otherwise the ranked bar is mandatory, with the exact labels given."""
 
+SOURCE_RULES = """You build the search strategy a recruiter runs BY HAND, from a decode
+another pass has already produced. You do not run searches and you never suggest
+automating one: every string here is for a human to type into LinkedIn's own search box or
+a web search engine. No scraping, no browser automation, no bulk collection. That is the
+hard boundary of this kit and it is not negotiable.
+
+The analysis is settled. Do not re-argue the verdict or add roles.
+
+Rules:
+
+1. ONE SEARCH PER LABOUR MARKET. Never one string for a bundled req. A single string for a
+   JD that bundles an integrator and an ML engineer is exactly what puts an ML engineer's
+   phone in the recruiter's hand for an integrator's job, and it is why good candidates
+   stop taking calls. If the decode names three markets, you produce three searches and
+   you say which one the client should fill first.
+
+2. EXCLUSIONS ARE THE POINT, and they come from the OTHER markets in the same JD. If the
+   core role is an integrator and the JD also bundles ML-in-production and fraud
+   analytics, the integrator search must NOT surface people whose profile centre of
+   gravity is model training or fraud detection. Say in one line why each exclusion is
+   there, so the recruiter can defend it and relax it when the pool is thin.
+
+3. PROFILES USE THE CANDIDATE'S WORD; JDs USE THE CLIENT'S WORD. Map the title across
+   three company sizes -- big enterprise, mid-size, startup -- because the same person is
+   a "Business Applications Consultant" at one and an "Automation Engineer" at another.
+   Search the candidate's word, not the JD's.
+
+4. KEEP EACH STRING SHORT -- roughly 10 terms or fewer. Long strings get truncated in
+   free-tier search, and heavy searching hits LinkedIn's commercial-use limit, which caps
+   a free account for the rest of the month. Say so in the warnings.
+
+5. SYNTAX, exactly: operators AND / OR / NOT in capitals; multi-word phrases in double
+   quotes; parentheses balanced; no trailing operator. A string that does not parse wastes
+   a search the recruiter cannot get back.
+
+6. X-RAY is the free-account alternative: site:linkedin.com/in plus terms, run in a web
+   search engine against public pages. Give one per market.
+
+7. WHERE THEY ARE BESIDES a profile search: the communities, user groups, meetups, vendor
+   forums and open-source corners where this exact skill actually lives. The recruiter
+   goes there as a person, not as a search. Be specific -- name the kind of place, not
+   "relevant online communities".
+
+Return ONE JSON object and nothing else:
+
+{
+  "per_market": [
+    {
+      "role": str,
+      "is_core": bool,
+      "tight": str,
+      "wide": str,
+      "exclude": str,
+      "why_exclusions": str,
+      "xray": str,
+      "titles": {"enterprise": [str], "midsize": [str], "startup": [str]},
+      "where_else": [{"place": str, "why": str}]
+    }
+  ],
+  "fill_first": str,
+  "warnings": [str]
+}"""
+
+
+def source(jd_text, analysis, model, attempts=3):
+    """Search strategy, validated. A string that does not parse wastes a search the
+    recruiter cannot get back, so failures are fed back and the pass re-runs rather than
+    handing over something broken."""
+    base = (SOURCE_RULES + "\n\n--- JOB DESCRIPTION AS RECEIVED ---\n" + jd_text.strip()
+            + "\n--- END ---\n\n--- DECODE (settled) ---\n"
+            + json.dumps({k: v for k, v in analysis.items() if k != "_meta"}, indent=2)
+            + "\n--- END ---\n")
+    prompt, last = base, []
+    for attempt in range(attempts):
+        sr = _call(prompt, model)
+        last = check_search(sr)
+        if not last:
+            sr["_meta"] = {"model": model, "attempts": attempt + 1}
+            return sr
+        print(f"  strings failed validation, re-asking ({attempt + 1}/{attempts}):",
+              file=sys.stderr)
+        for x in last:
+            print("    -", x, file=sys.stderr)
+        prompt = (base + "\nA previous attempt produced these faults. Fix every one and "
+                  "return the corrected JSON:\n" + "\n".join("- " + x for x in last) + "\n")
+    sr["_meta"] = {"model": model, "attempts": attempts, "unfixed": last}
+    return sr
+
+
+OPS = ("AND", "OR", "NOT")
+
+
+def check_boolean(q, label):
+    """Does this string actually parse? A broken string wastes a search."""
+    p = []
+    if not q or not q.strip():
+        return [f"{label}: empty"]
+    if q.count("(") != q.count(")"):
+        p.append(f"{label}: unbalanced parentheses ({q.count('(')} open, {q.count(')')} close)")
+    if q.count('"') % 2:
+        p.append(f"{label}: odd number of double quotes")
+    for bad in re.findall(r"(?<![A-Za-z])(and|or|not)(?![A-Za-z])", q):
+        p.append(f"{label}: lowercase operator '{bad}' -- LinkedIn only honours capitals")
+        break
+    if re.search(r"\b(AND|OR|NOT)\s*$", q.strip()):
+        p.append(f"{label}: ends on a dangling operator")
+    # a multi-word phrase sitting outside quotes is read as an implicit AND of two words
+    stripped = re.sub(r'"[^"]*"', "", q)
+    words = [w for w in re.findall(r"[A-Za-z][A-Za-z0-9+#./-]*", stripped) if w not in OPS]
+    terms = len(re.findall(r'"[^"]*"', q)) + len(words)
+    if terms > 12:
+        p.append(f"{label}: ~{terms} terms; free-tier search truncates past roughly 10")
+    if "linkedin.com" in q and not q.lstrip().startswith("site:"):
+        p.append(f"{label}: contains a linkedin.com URL outside an x-ray site: prefix")
+    return p
+
+
+def check_search(sr):
+    p = []  # _meta is harness bookkeeping, not part of the contract
+    pm = sr.get("per_market")
+    if not isinstance(pm, list) or not pm:
+        return ["per_market must be a non-empty list"]
+    for i, m in enumerate(pm):
+        tag = f"per_market[{i}] ({str(m.get('role'))[:32]})"
+        for field in ("tight", "wide", "exclude"):
+            p += check_boolean(m.get(field, ""), f"{tag}.{field}")
+        x = m.get("xray", "")
+        if "site:linkedin.com/in" not in x.replace(" ", ""):
+            p.append(f"{tag}.xray: missing site:linkedin.com/in")
+        if not m.get("why_exclusions"):
+            p.append(f"{tag}: exclusions given with no reason (rule 2)")
+        t = m.get("titles") or {}
+        for size in ("enterprise", "midsize", "startup"):
+            if not t.get(size):
+                p.append(f"{tag}.titles.{size} empty (rule 3)")
+        if not m.get("where_else"):
+            p.append(f"{tag}.where_else empty (rule 7)")
+    if len(pm) > 1 and not sr.get("fill_first"):
+        p.append("multiple markets but no fill_first (rule 1)")
+    if not sr.get("warnings"):
+        p.append("warnings empty -- the commercial-use limit note is required (rule 4)")
+    return p
+
+
 VERDICTS = {"does_not_make_sense", "makes_sense_with_edits", "makes_sense"}
 GENDERED = re.compile(r"\b(she|he|her|hers|him|his|herself|himself)\b", re.I)
 BAR = ("Must have", "Strong plus", "Genuinely optional")
@@ -449,6 +593,19 @@ def main():
         m = d["_meta"]
         print(f"[{model}] roles={m['role_counts']} verdicts={m['verdicts']} "
               f"unanimous={m['unanimous_roles'] and m['unanimous_verdict']}", file=sys.stderr)
+    elif cmd == "source":
+        d = json.load(open(path))
+        jd = open(sys.argv[3]).read() if len(sys.argv) > 3 else ""
+        model = sys.argv[4] if len(sys.argv) > 4 else DEFAULT_MODEL
+        sr = source(jd, d, model)
+        print(json.dumps(sr, indent=2))
+        unfixed = sr.get("_meta", {}).get("unfixed")
+        if unfixed:
+            print("SEARCH STRINGS STILL FAIL after retries:", file=sys.stderr)
+            for x in unfixed: print("  -", x, file=sys.stderr)
+            return 1
+        print(f"strings parse — {len(sr['per_market'])} market(s), "
+              f"{sr['_meta']['attempts']} attempt(s)", file=sys.stderr)
     elif cmd == "check":
         d = json.load(open(path))
         probs = check_schema(d)
