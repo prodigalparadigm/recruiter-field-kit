@@ -39,14 +39,22 @@ The other five passes work the same way, and each one tells you what to feed it:
 | [`05-fit-score.md`](references/05-fit-score.md) | one profile scored | the decode + a pasted profile |
 | [`06-receipts.md`](references/06-receipts.md) | what someone has actually built | GitHub facts |
 
-### 2. Install it as a Claude Skill
+### 2. Publish it as a Custom GPT — the zero-friction route for a recruiter
+
+Most recruiters will not install anything, will not hold an API key, and should never see a
+reference file. [`distribution/custom-gpt/`](distribution/custom-gpt/) has what you need:
+router instructions that fit ChatGPT's 8,000-character limit, the six passes as knowledge
+files, and a setup guide. They click a link, paste a JD, get a report. Turn browsing off —
+the hard boundary depends on it.
+
+### 3. Install it as a Claude Skill
 
 Put this repo where your Claude reads skills from and [`SKILL.md`](SKILL.md) wires up all
 six tools with trigger phrases — "decode this JD", "is this one job or three", "build me a
 search for this", "should I apply". Claude picks the right pass itself instead of you
 choosing a file.
 
-### 3. Run the CLI
+### 4. Run the CLI
 
 For batch work, tuning, or testing against fixtures. Needs Python 3.12 and an Anthropic
 API key.

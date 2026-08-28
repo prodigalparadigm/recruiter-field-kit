@@ -21,6 +21,8 @@ import probe
 
 SPLIT = "Return ONE JSON object"
 HERE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "references")
+GPT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..",
+                   "distribution", "custom-gpt", "knowledge")
 
 # (file, title, rules, gives, feed, next_step, context, report)
 PASSES = [
@@ -159,6 +161,16 @@ def human(title, rules, gives, feed, nxt, context, report):
             f"No JSON, no preamble.\n\n{report}\n```\n")
 
 
+def knowledge(title, rules, report, nxt):
+    """Knowledge-file variant for a Custom GPT. Same rules, no human-paste framing: the
+    GPT is the reader, so 'copy everything below into Claude' would be nonsense."""
+    body = rules.split(SPLIT)[0].rstrip()
+    return (f"# {title}\n\n*Generated from `tools/probe.py`. Do not edit here.*\n\n"
+            f"Follow these rules exactly. Next step after this pass: {nxt}\n\n"
+            f"{body}\n\nReturn a readable markdown report in exactly this shape. "
+            f"No JSON, no preamble.\n\n{report}\n")
+
+
 def machine(title, rules):
     return (f"# {title} — JSON contract\n\nMachine-readable variant, for wiring into code. "
             f"Humans want [`../{'':s}`](..) instead.\n\n"
@@ -168,13 +180,15 @@ def machine(title, rules):
 def main():
     check = "--check" in sys.argv
     os.makedirs(os.path.join(HERE, "json"), exist_ok=True)
+    os.makedirs(GPT, exist_ok=True)
     stale = []
     for fn, title, rules, gives, feed, nxt, context, report in PASSES:
         for path, want in ((os.path.join(HERE, fn), human(title, rules, gives, feed, nxt, context, report)),
-                           (os.path.join(HERE, "json", fn), machine(title, rules))):
+                           (os.path.join(HERE, "json", fn), machine(title, rules)),
+                           (os.path.join(GPT, fn), knowledge(title, rules, report, nxt))):
             have = open(path).read() if os.path.exists(path) else None
             if want != have:
-                stale.append(os.path.relpath(path, HERE))
+                stale.append(os.path.relpath(path, os.path.join(HERE, "..")))
                 if not check:
                     open(path, "w").write(want)
     if check:
@@ -182,9 +196,9 @@ def main():
             print("FAIL: references/ is stale, re-run tools/export_references.py:")
             for f in stale: print("  -", f)
             return 1
-        print(f"PASS: references/ in sync with the prompts ({len(PASSES) * 2} files).")
+        print(f"PASS: prompts in sync across all surfaces ({len(PASSES) * 3} files).")
     else:
-        print(f"wrote {len(PASSES) * 2} files" + (f" ({len(stale)} changed)" if stale else ""))
+        print(f"wrote {len(PASSES) * 3} files" + (f" ({len(stale)} changed)" if stale else ""))
     return 0
 
 
