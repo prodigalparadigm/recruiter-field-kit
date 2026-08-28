@@ -1,0 +1,184 @@
+{
+  "title_as_posted": "Clinical AI Integration Lead",
+  "roles_bundled": [
+    {
+      "role": "Healthcare interoperability / integration engineer (HL7 v2, FHIR, interface engine, Epic/Cerner) \u2014 including partner onboarding and production on-call",
+      "evidence": [
+        "\"Build and maintain HL7 v2 and FHIR interfaces to partner health systems, including Epic and Cerner installations, and own the interface engine configuration\"",
+        "\"Troubleshoot production interface failures with hospital IT counterparts, including after-hours escalations when a feed breaks\"",
+        "\"Manage the onboarding of new health-system partners end to end: mapping, testing, go-live\"",
+        "\"5+ years working with healthcare interoperability standards (HL7 v2, FHIR), and hands-on experience with an interface engine such as Mirth, Rhapsody or Cloverleaf\"",
+        "\"Direct experience integrating with Epic or Cerner in a production hospital environment\""
+      ]
+    },
+    {
+      "role": "Clinical NLP / ML engineer (train, deploy and own extraction models on free-text notes, plus evaluation methodology)",
+      "evidence": [
+        "\"Train, evaluate and deploy clinical NLP models that extract structured findings from free text notes, and own model performance in production\"",
+        "\"Design the evaluation methodology for clinical extraction quality, including clinician adjudication of disagreements\"",
+        "\"Experience training and deploying NLP or LLM-based models on clinical text, with measurable accuracy targets\"",
+        "\"Python, and comfort owning a model in production rather than handing it off\"",
+        "\"Keep model behaviour within our regulatory posture and support evidence for audits\""
+      ]
+    }
+  ],
+  "core_role": "There is no core role \u2014 the JD says so itself: \"We are hiring a Clinical AI Integration Lead to own both halves of that.\" Two separate labour markets are named in the same sentence and both are gated in Required. The interface half (HL7 v2/FHIR, Mirth/Rhapsody/Cloverleaf, Epic/Cerner, go-lives, 2am feed breaks) is sourced from health-system integration analysts, HIE/interface engineers and vendor implementation engineers. The model half (training/deploying clinical NLP or LLM extraction, owning accuracy in production, designing adjudicated eval) is sourced from clinical NLP/ML engineers, typically ex-academic-medical-centre informatics, ex-Nuance/3M HIS/Abridge/Regard type shops. Delete either block and the remaining job is a completely different search with a completely different candidate pool, different keywords and a different comp curve. I did test and reject one further split: partner onboarding \"end to end: mapping, testing, go-live\" reads like an implementation-consultant market, but at a health-tech vendor the interface engineer who builds the feed commonly runs the go-live, so that merges into the interop role rather than standing alone. The regulatory bullet is a supporting task (\"support evidence for audits\"), not a third hire \u2014 but see the questions: if the product is a regulated device, the model half narrows to a much smaller population than the JD admits.",
+  "skills": {
+    "must_have": [
+      {
+        "skill": "HL7 v2 and FHIR interface build and maintenance",
+        "why": "First responsibility and first Required line, with a 5+ year bar attached. This is the screening gate for the interop half."
+      },
+      {
+        "skill": "Interface engine configuration \u2014 Mirth, Rhapsody or Cloverleaf",
+        "why": "\"own the interface engine configuration\", named again in Required with three specific products. Recruiters should treat the named engine as a keyword filter; clients rarely accept a fourth engine without argument."
+      },
+      {
+        "skill": "Production Epic and/or Cerner integration inside a hospital environment",
+        "why": "Its own Required line, and the word \"production hospital environment\" excludes sandbox/App Orchard-only exposure. This is the hardest single filter on the interop side."
+      },
+      {
+        "skill": "Training, deploying and owning clinical NLP / LLM extraction models in production",
+        "why": "A responsibility bullet and a Required line, with \"own model performance in production\" \u2014 not a research or prototype ask. This is the entire second labour market."
+      },
+      {
+        "skill": "Evaluation methodology design for clinical extraction, including clinician adjudication",
+        "why": "Its own responsibility bullet. This is applied clinical measurement work (gold-standard sets, inter-annotator disagreement, precision/recall targets by finding type), not the same skill as training a model."
+      },
+      {
+        "skill": "Python with production model ownership (deployment, monitoring, drift)",
+        "why": "Required, and explicitly framed as \"rather than handing it off\" \u2014 there is no ML platform team implied behind this person."
+      },
+      {
+        "skill": "Live production troubleshooting with hospital IT, including after-hours",
+        "why": "A responsibility bullet with an on-call obligation attached. This is a temperament and availability filter, not just a skill, and it will lose you candidates late in process if you don't raise it early."
+      }
+    ],
+    "should_have": [
+      {
+        "skill": "Health-system partner onboarding / go-live management (mapping, testing, cutover)",
+        "why": "\"end to end\" ownership of new partners. Project-management muscle, not engineering \u2014 commonly held by interface engineers at vendors, so it merges, but it consumes real calendar time alongside the model work."
+      },
+      {
+        "skill": "PHI handling and de-identification",
+        "why": "Listed as nice-to-have, but the job trains models on free-text clinical notes for partner health systems. In practice the client will not hire someone who cannot speak to PHI boundaries; treat it as functionally required."
+      },
+      {
+        "skill": "Clinician-in-the-loop evaluation workflows",
+        "why": "Listed nice-to-have while the matching responsibility (\"clinician adjudication of disagreements\") is a required duty. Classic nice-to-have that is really a must."
+      },
+      {
+        "skill": "Working in a regulated clinical setting / audit evidence",
+        "why": "Nice-to-have in the list, but \"Keep model behaviour within our regulatory posture and support evidence for audits\" is a required duty. How hard this bites depends entirely on whether the product is FDA-regulated \u2014 unanswered in the JD."
+      },
+      {
+        "skill": "Two-audience communication: hospital IT and clinicians",
+        "why": "Required line. Genuinely load-bearing here because the same person negotiates VPN/feed issues with an integration team and adjudication rules with clinicians \u2014 but it is unscreenable as worded, so probe it with specifics rather than trusting the CV."
+      }
+    ],
+    "nice_to_have": [],
+    "decorative": [
+      {
+        "skill": "\"Able to hold a technical conversation with hospital IT and with clinicians\" as a written requirement",
+        "why": "Every candidate will claim it and no CV disproves it. The underlying capability is real (listed above in should_have); the sentence itself screens nobody."
+      },
+      {
+        "skill": "\"our regulatory posture\"",
+        "why": "Undefined phrase. Could mean HIPAA/SOC2 hygiene or could mean FDA SaMD with a predicate and a quality system. Until the client says which, this line tells you nothing about who to source."
+      },
+      {
+        "skill": "\"Lead\" in the title",
+        "why": "No reports, no team, no scope of authority anywhere in the body. It is a scope label attached to doing two jobs, not a management line."
+      }
+    ]
+  },
+  "seniority_read": "The interop bar alone (5+ years standards work, an engine, production Epic/Cerner, owning go-lives and after-hours escalations) reads senior individual contributor \u2014 Boston market roughly $140\u2013175k, so the posted $140\u2013155k sits at the bottom-to-middle of that one market and is defensible if that is the hire. The model bar alone (train/deploy/own clinical NLP or LLM extraction in production, design the eval methodology, carry regulatory evidence) reads senior ML engineer at a Series C health-tech company \u2014 Boston market roughly $180\u2013230k base, above this band on its own. Someone who genuinely has both, at production depth, is a clinical-informatics-engineer unicorn and prices above $200k with equity. So: the band prices one of the two roles, the cheaper one, and the title says \"Lead\" while conferring no team. A recruiter should read the $140\u2013155k as the client's honest self-assessment that they are buying an interface engineer, whatever the AI language in the header says.",
+  "person_portrait": "The person the client is picturing does exist, but there are maybe a few dozen of them within commuting distance of Boston and none of them are on the market at $155k. They sit inside a hospital system's informatics group or at a mid-size clinical-AI vendor, with a title like Senior Integration Engineer or Clinical Informatics Engineer, and before that Interface Analyst or Integration Analyst at an AMC or an HIE. They came up in Mirth or Rhapsody, know the specific way an Epic ADT feed dies at 3am when the hospital changes a MSH-4, and drifted into NLP because someone asked them to pull problem lists out of discharge summaries and they started with regex, then spaCy or cTAKES, then a fine-tuned transformer, and lately have been benchmarking a hosted LLM against it. They talk in concrete failures: the go-live where the receiving system silently dropped OBX-5 for six weeks, or the extraction model that hit 0.91 F1 in eval and fell over on one site's templated notes because the clinicians pasted the same header into every encounter. On the phone they are unhurried, more interested in what your gold-standard set looks like and who adjudicates ties than in what the comp is, and they will ask early whether they are the only person on the pager. The far more common candidate you will actually surface is one half of them \u2014 either an interface engineer whose 'AI experience' is having called an API, or an ML engineer who has touched clinical text through a de-identified research corpus and has never once been on a hospital cutover call. Both will apply; neither will pass the client's Required list.",
+  "red_flags_for_recruiter": [
+    "Two distinct labour markets are gated in the same Required list, and the salary band prices only the cheaper one. You can source either half quickly; the combination at $140\u2013155k you cannot fill.",
+    "The 5+ year bar is attached only to interoperability. The NLP/LLM requirement carries no years and no scale, so it will be enforced by vibe at screen \u2014 expect the client to reject ML-light interop candidates late, after they've invested calls, on 'not deep enough on models'.",
+    "After-hours escalation is stated as a duty with no rotation, no size of the on-call population, no comp uplift and no volume of feeds. Candidates who have been burned by a solo pager will ask; you need the answer before you submit.",
+    "Number of partner health systems, feeds, and models in production is nowhere in the JD. Ambiguity will be resolved by the client, not by you \u2014 assume it is more surface than one person can hold and confirm the count before promising anyone a manageable scope.",
+    "\"Keep model behaviour within our regulatory posture\" plus \"support evidence for audits\" may mean the product is an FDA-regulated device. If so, the acceptable ML population shrinks dramatically (SaMD, 510(k)/PCCP, design controls) and the band is off by a wide margin. If it only means HIPAA and SOC2, say so and the search opens up.",
+    "\"Lead\" with no reports and no stated authority. Candidates at this experience level read a Lead title with a $140k floor as a downlevel, and senior ML candidates will screen the posting out on the band before you ever speak to them.",
+    "Nice-to-haves duplicate required duties (clinician-in-the-loop eval, regulated setting, PHI). Anyone you submit without them will be rejected, so treat the nice-to-have list as a second set of must-haves and price accordingly.",
+    "Hybrid, 2 days onsite Boston, narrows an already tiny hybrid-of-two-skills pool. Do not assume flexibility \u2014 get it in writing if you want to search nationally for the ML half."
+  ],
+  "sanity": {
+    "verdict": "does_not_make_sense",
+    "problems": [
+      "Two labour markets bundled into one full-time req \u2014 healthcare interoperability engineering (HL7 v2/FHIR, interface engine, Epic/Cerner, partner go-lives, after-hours production support) and clinical NLP/ML engineering (train, deploy, own extraction models; design adjudicated evaluation). The JD is explicit that it wants \"both halves\", and both are gated in Required, not preferred.",
+      "The posted band, $140,000\u2013$155,000, prices the interop role in Boston and underprices the ML role on its own by roughly $40\u201370k. It does not price the combination at all. This is the condition that makes the req unhireable as written rather than merely demanding.",
+      "Capacity: production on-call for hospital feeds is interrupt-driven and unpredictable; owning model performance and building an adjudicated evaluation programme with clinicians is deep, uninterrupted work. The same week cannot reliably contain both, and the JD names no other engineer on either side.",
+      "Scope is unbounded in every dimension that matters \u2014 no count of partner health systems, no count of live interfaces, no count of models, no on-call rotation size. Screening will be done against whatever the client privately means, not against the generous reading.",
+      "The years bar sits on the interop side only. Read as the client will read it, that means 5+ years of interoperability AND unquantified but 'real' production clinical NLP \u2014 a population measured in dozens nationally, most of whom are already above this band.",
+      "\"Lead\" in the title with no team, no reports and no described authority; the only authority-flavoured duty (\"keep model behaviour within our regulatory posture\") is written as support, not ownership.",
+      "Three nice-to-haves (clinician-in-the-loop eval, regulated clinical setting, PHI/de-identification) directly mirror required responsibilities, so the real bar is higher than the Required section states."
+    ],
+    "questions_to_ask_the_client": [
+      "If you could only fill one half in the next 60 days, which is it \u2014 the interfaces or the models? Who covers the other half in the meantime?",
+      "Is there an existing ML or data science function, or would this person be the only one owning models in production? Same question for the interface engine: who else can touch it today?",
+      "How many partner health systems are live, how many interfaces, and how many new partner onboardings are planned in the next 12 months?",
+      "What does after-hours coverage actually look like \u2014 is there a rotation, how many people are in it, how many pages a month, and is there any on-call compensation?",
+      "Is the product FDA-regulated (SaMD, 510(k), predetermined change control) or is 'regulatory posture' HIPAA/SOC2/BAA compliance? This changes both the candidate pool and the band.",
+      "How many models are in production today, what are the current accuracy targets, and does a gold-standard dataset and clinician adjudication process already exist or is this person building it from zero?",
+      "The band is $140\u2013155k. Senior clinical NLP engineers in Boston are commanding $180k+. Is there flexibility, equity that closes the gap, or should we source to the interop profile and treat the model work as a stretch?",
+      "Would you consider two hires \u2014 a senior integration engineer and a clinical ML engineer \u2014 or one hire plus a contractor on the model side?",
+      "Is 2 days onsite in Boston firm for the ML half of the profile, or would you go fully remote for the right model person if the interfaces were covered locally?",
+      "Which interface engine are you actually running, and would you accept a strong Rhapsody person if you are on Mirth (or vice versa)?"
+    ],
+    "fix": "Hi [Name],\n\nI can't fill this as written. It's two jobs: an interoperability engineer (HL7 v2/FHIR, Mirth/Rhapsody/Cloverleaf, production Epic/Cerner, go-lives, after-hours pager) and a clinical NLP engineer (train, deploy and own extraction models, design adjudicated evaluation). Both sit in Required. In Boston the interop half pays $140-175k; the ML half alone $180-230k. Your band prices one. The handful who do both are above $200k.\n\nI'll still run it. Here's the bar I'm screening to, so nothing surprises you at offer:\n\nMust have - I will not submit without these\n5+ years HL7 v2 and FHIR; hands-on Mirth, Rhapsody or Cloverleaf; production Epic or Cerner in a live hospital; trained and deployed clinical NLP/LLM extraction and owned accuracy in production; Python with deployment and monitoring; will take after-hours feed breaks.\n\nStrong plus\nPartner onboarding through go-live; PHI and de-identification; clinician-in-the-loop adjudication; regulated setting and audit evidence; credible with hospital IT and clinicians.\n\nGenuinely optional\nNothing on your list. Your three nice-to-haves mirror required duties, so I screen for them too.\n\nFour answers before I source:\n1. If you can only fill one half in 60 days, which?\n2. Is the product FDA-regulated, or does \"regulatory posture\" mean HIPAA/SOC2?\n3. On-call: rotation size, pages a month, any uplift?\n4. Is the band movable, or do we hire interop and contract the model work?\n\nThanks,\n[Recruiter]"
+  },
+  "how_to_tell_in_ten_minutes": [
+    {
+      "question": "Take me to the last interface change you pushed into a live hospital. Who had to sign it off before it moved, and what did they make you produce?",
+      "real_answer_sounds_like": "\"It went through the health system's change advisory board \u2014 I had a ticket in their ServiceNow queue, a test plan showing sample messages through the Epic Bridges interface in their POC environment, and a backout plan. Their Epic interface analyst had to approve it, and the window was Tuesday 2-4am because that's when their CAB allows non-emergency interface changes. I couldn't touch their side at all; I sent them the spec and they built the outbound.\"",
+      "bluff_sounds_like": "\"I owned the Mirth channels, so I'd make the change, test it in dev and promote it. We moved pretty fast \u2014 no real gatekeeping, the hospital just wanted the data flowing.\""
+    },
+    {
+      "question": "Who at the health system had to grant you access to the production Epic or Cerner environment, and what did you have to clear before they did?",
+      "real_answer_sounds_like": "\"Their integration team plus their security office. We had a signed BAA first, then a vendor security review \u2014 questionnaire, pen test summary, SOC 2 report. Access was through their VPN onto a jump box, my account was named and time-limited, and I had to validate against their non-prod interface with de-identified test messages before they'd open the prod port. Getting the firewall rule took three weeks and two escalations.\"",
+      "bluff_sounds_like": "\"We integrated with Epic \u2014 we were on FHIR APIs through their sandbox and registered the app, so we had access to the patient data we needed.\""
+    },
+    {
+      "question": "When you trained a model on real clinical notes, who approved the use of that data, and what constraints did they put on you?",
+      "real_answer_sounds_like": "\"Our privacy officer and the health system's data governance committee. The DUA limited us to notes from consented encounters at two sites, de-identification had to run before anything left their VPC, and I wasn't allowed to send PHI to a hosted LLM until legal got a BAA and zero-retention terms in writing \u2014 until that closed I was fine-tuning a local model instead. Every export was logged and reviewed quarterly.\"",
+      "bluff_sounds_like": "\"It was all HIPAA compliant and the data was de-identified. We used GPT-4 on the notes \u2014 nobody raised any issues, it was internal.\""
+    },
+    {
+      "question": "Who adjudicated model disagreements for you, and how did you get a clinician's time on the calendar for that?",
+      "real_answer_sounds_like": "\"Two hospitalists, and I had to get their service chief to allocate four hours a week \u2014 it was a negotiation, not a favour. We wrote annotation guidelines, hit about 0.72 kappa on the first round, rewrote the guidelines twice, and disagreements went to a third clinician as tie-break. That gold set was what our accuracy claims were measured against, and clinical leadership had to approve the thresholds before we shipped.\"",
+      "bluff_sounds_like": "\"We had clinicians spot-check the outputs and they were happy with the quality. We were hitting 0.91 F1 on our held-out set, so the model was in good shape.\""
+    },
+    {
+      "question": "Last time a feed broke after hours \u2014 who did you have to wake up, and who authorised the recovery?",
+      "real_answer_sounds_like": "\"Epic ADT stopped at 1am after they changed MSH-4 on a merge. I paged our on-call, then their command centre, and I could not replay messages until their interface analyst approved it \u2014 replaying ADT can create duplicate encounters, so it needed their sign-off and a downtime notice to the clinical users. We reconciled the gap the next morning and I wrote the RCA their IT director asked for.\"",
+      "bluff_sounds_like": "\"If something breaks I get the alert, check the logs, restart the channel and reprocess the queue. Usually done in twenty minutes and nobody else needs to be involved.\""
+    },
+    {
+      "question": "What did a model change have to get past before it reached real patient care, and who owned that gate?",
+      "real_answer_sounds_like": "\"Quality owned it, not me. Any change to the extraction model was a controlled change: validation protocol written against the intended-use statement, results reviewed by our regulatory lead, and release approved in the eQMS. We had a predetermined change control plan for retraining, and I supplied the eval evidence when the auditor asked for it. Anything outside the PCCP boundary meant a new submission, so I couldn't just retrain and push.\"",
+      "bluff_sounds_like": "\"We were HIPAA compliant and had SOC 2, so we were fine. I'd retrain when performance drifted and deploy it \u2014 the metrics were on a dashboard if anyone wanted to look.\""
+    }
+  ],
+  "_meta": {
+    "model": "claude-opus-5",
+    "votes": 3,
+    "role_counts": [
+      2,
+      2,
+      3
+    ],
+    "verdicts": [
+      "does_not_make_sense",
+      "does_not_make_sense",
+      "does_not_make_sense"
+    ],
+    "unanimous_roles": false,
+    "unanimous_verdict": true,
+    "won": {
+      "roles": 2,
+      "verdict": "does_not_make_sense"
+    }
+  }
+}

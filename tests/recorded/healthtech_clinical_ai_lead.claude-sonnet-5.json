@@ -1,0 +1,158 @@
+{
+  "title_as_posted": "Clinical AI Integration Lead",
+  "roles_bundled": [
+    {
+      "role": "Healthcare Interoperability / Interface Engineer (HL7 v2, FHIR, Epic/Cerner)",
+      "evidence": [
+        "Build and maintain HL7 v2 and FHIR interfaces to partner health systems, including Epic and Cerner installations, and own the interface engine configuration",
+        "Troubleshoot production interface failures with hospital IT counterparts, including after-hours escalations when a feed breaks",
+        "Manage the onboarding of new health-system partners end to end: mapping, testing, go-live",
+        "5+ years working with healthcare interoperability standards (HL7 v2, FHIR), and hands-on experience with an interface engine such as Mirth, Rhapsody or Cloverleaf",
+        "Direct experience integrating with Epic or Cerner in a production hospital environment"
+      ]
+    },
+    {
+      "role": "Clinical NLP / ML Engineer (production model training, evaluation, deployment)",
+      "evidence": [
+        "Train, evaluate and deploy clinical NLP models that extract structured findings from free text notes, and own model performance in production",
+        "Design the evaluation methodology for clinical extraction quality, including clinician adjudication of disagreements",
+        "Keep model behaviour within our regulatory posture and support evidence for audits",
+        "Experience training and deploying NLP or LLM-based models on clinical text, with measurable accuracy targets"
+      ]
+    }
+  ],
+  "core_role": "The JD names one hire but actually describes two separate labour markets that do not commonly live in one person: a healthcare interoperability/interface engineer (HL7 v2/FHIR, Epic/Cerner, on-call feed troubleshooting) and a clinical NLP/ML engineer who trains, evaluates and owns production model performance on clinical text. Delete either block and the remaining job is still a complete, separately-sourced role; there is no reading where these merge into one normal search.",
+  "skills": {
+    "must_have": [
+      {
+        "skill": "HL7 v2 and FHIR standards, 5+ years",
+        "why": "Named as the explicit years-gated requirement and the first responsibility listed"
+      },
+      {
+        "skill": "Hands-on interface engine experience (Mirth, Rhapsody, or Cloverleaf)",
+        "why": "Explicitly required and tied to owning interface engine configuration in production"
+      },
+      {
+        "skill": "Direct Epic or Cerner integration experience in a live hospital environment",
+        "why": "Called out as its own required line, not folded into the general HL7/FHIR bar"
+      },
+      {
+        "skill": "Training and deploying NLP or LLM-based models on clinical text with measurable accuracy targets",
+        "why": "Stated as required and is the entire basis of the 'AI' half of the title"
+      },
+      {
+        "skill": "Python with ownership of models in production (not handoff)",
+        "why": "Explicitly required and distinguishes this from a research/DS-only profile"
+      },
+      {
+        "skill": "Ability to hold technical conversations with hospital IT and with clinicians",
+        "why": "Explicit requirement; reflects the dual external-facing nature of the role"
+      }
+    ],
+    "should_have": [
+      {
+        "skill": "Designing clinical extraction evaluation methodology, including clinician adjudication",
+        "why": "A named responsibility with real judgment content, not a bullet-list afterthought"
+      },
+      {
+        "skill": "Supporting regulatory posture and audit evidence for model behaviour",
+        "why": "Named responsibility implying compliance-adjacent documentation duties"
+      },
+      {
+        "skill": "After-hours production interface troubleshooting",
+        "why": "Explicitly named responsibility with on-call implication"
+      }
+    ],
+    "nice_to_have": [
+      {
+        "skill": "Prior work in a regulated clinical setting",
+        "why": "Listed under Nice to have"
+      },
+      {
+        "skill": "De-identification / PHI handling familiarity",
+        "why": "Listed under Nice to have"
+      },
+      {
+        "skill": "Clinician-in-the-loop evaluation workflow experience",
+        "why": "Listed under Nice to have"
+      }
+    ],
+    "decorative": [
+      {
+        "skill": "\"Our platform sits between hospital systems and the clinicians who use them\"",
+        "why": "Scene-setting company narrative, not a skill or requirement"
+      }
+    ]
+  },
+  "seniority_read": "Senior individual-contributor engineer despite the 'Lead' title. The 5+ years HL7/FHIR bar and 'own model performance in production' language point to a hands-on senior IC, not a manager of people or a cross-team standard-setter. No direct reports, budget, or org-chart authority are described anywhere in the JD.",
+  "person_portrait": "This is someone who currently works at a health-tech vendor or hospital IT department as an interface analyst or integration engineer, has spent years inside Mirth or Rhapsody consoles, and has taken at least one Epic or Cerner go-live from mapping through cutover. They've been paged at 2am because an ADT feed dropped and know exactly which HL7 segment to check first. If this same person also has genuine production NLP/LLM deployment experience on clinical text, it is unusual \u2014 more likely they picked up scripting and some model-consumption work on the side, not that they've owned a model's accuracy metrics end to end. The honest portrait splits into two different people: one is an interoperability engineer who calls a vendor NLP API; the other is a clinical NLP engineer who has never touched an interface engine. Whoever the client actually wants, this JD's phone screen will reveal within five minutes which half of the job the candidate can't do.",
+  "red_flags_for_recruiter": [
+    "Two distinct labour markets (interoperability engineering and clinical NLP/ML engineering) are bundled into one req with one salary band; a senior HL7/FHIR interface engineer with production Epic/Cerner experience is itself a $140-160k+ market in Boston, and a production clinical NLP/ML owner is a comparable or higher market \u2014 the posted band does not cover paying for both skillsets in one hire.",
+    "The 'Lead' title implies scope or authority (setting eval methodology, regulatory posture, audit evidence) that a $140-155k IC-level band and no stated reports does not obviously support \u2014 confirm whether this is really a lead role or a title applied to a heavily-loaded IC job.",
+    "After-hours on-call for interface failures plus production model ownership plus regulatory audit support is three separate on-call/accountability burdens stacked on one person \u2014 worth flagging before submitting anyone.",
+    "No clarity on which half of the role the client will screen candidates against first; a recruiter who submits a strong interoperability engineer with light NLP exposure, or a strong NLP engineer with no Epic/Cerner production history, may get rejected against whichever half the hiring manager actually cares about most."
+  ],
+  "sanity": {
+    "verdict": "does_not_make_sense",
+    "problems": [
+      "Two labour markets are bundled \u2014 HL7/FHIR/Epic/Cerner interoperability engineering, and clinical NLP/LLM model training-and-deployment \u2014 and both DELETE and CAPACITY tests confirm they are separately sourced, separately staffed jobs at any mid-size company.",
+      "The posted rate ($140k-$155k) reads as pricing for one senior specialist, not two; there is no signal in the JD about which market the client will actually prioritize when a resume shows strength in only one.",
+      "No stated split of time or priority between the two halves ('own both halves of that' is asserted but not resourced), so a recruiter cannot tell which population to source against without guessing."
+    ],
+    "questions_to_ask_the_client": [
+      "Is this genuinely one person doing both HL7/FHIR interface engineering AND clinical NLP model training/deployment, or is the real hire one of these with light exposure to the other?",
+      "If both are truly required, is the client prepared to price this at what two combined specialist markets command, or would they accept a candidate strong in one half and coachable on the other?",
+      "Who currently does the half of this work the new hire won't be doing on day one \u2014 is there an existing team member covering interfaces or covering NLP that this role backfills or supplements?",
+      "Is 'Lead' meant to convey people-management or cross-team standard-setting authority, or is it a title applied to a senior IC role?",
+      "What does the on-call rotation actually look like \u2014 is the after-hours interface troubleshooting shared with an ops team, or does this one person carry it solo alongside model ownership?"
+    ],
+    "fix": "Hi [Client],\n\nThis req reads as two separate hires stitched together: a healthcare interoperability engineer (HL7 v2/FHIR, Epic/Cerner, interface engine, after-hours support) and a clinical NLP/ML engineer who trains and owns model performance in production. Those are two different labor markets, and $140-155k prices one senior specialist, not both.\n\nBefore I submit anyone, I need to know which half you're actually hiring for:\n\nMust have - I will not submit without these\n- 5+ years HL7 v2/FHIR\n- Hands-on interface engine (Mirth, Rhapsody, or Cloverleaf)\n- Direct Epic or Cerner production integration\n- NLP/LLM training and deployment on clinical text with accuracy targets\n- Python, owning models in production\n- Comfortable talking to hospital IT and clinicians\n\nStrong plus\n- Designing eval methodology with clinician adjudication\n- Regulatory/audit support for model behavior\n- After-hours interface troubleshooting\n\nGenuinely optional\n- Regulated clinical setting background\n- De-identification/PHI handling\n- Clinician-in-the-loop workflows\n\nQuestions: is this genuinely one person doing both, or one skillset with light exposure to the other? Who covers the half the hire doesn't own day one? Is 'Lead' a management title or a senior IC label? Is the after-hours interface on-call shared or solo alongside model ownership?\n\nHolding submissions until I hear back on scope and priority.\n\nBest,\n[Recruiter]"
+  },
+  "how_to_tell_in_ten_minutes": [
+    {
+      "question": "Walk me through your last Epic or Cerner go-live end to end \u2014 who signed off on the interface mapping before it moved to production?",
+      "real_answer_sounds_like": "Names the hospital's interface change control board or IT director, describes the mapping doc review, test environment validation, and cutover approval sequence with specific segment/field detail.",
+      "bluff_sounds_like": "Says 'the team approved it' or 'it just went live after testing,' with no named approver, no mention of a change board, and no detail on what testing actually validated."
+    },
+    {
+      "question": "Tell me about a production interface config change in Mirth, Rhapsody, or Cloverleaf \u2014 who had to approve pushing it live?",
+      "real_answer_sounds_like": "Describes a change advisory process, a specific reviewer or ops lead who signed off, and what rollback plan existed if the channel broke.",
+      "bluff_sounds_like": "Talks generally about 'configuring channels' with no mention of any approval gate, sign-off, or rollback discipline."
+    },
+    {
+      "question": "Describe an NLP or LLM model you moved into production on clinical text \u2014 who had to approve it going live against real patient notes?",
+      "real_answer_sounds_like": "Names a clinical or regulatory reviewer, describes accuracy thresholds agreed in advance, and what evidence was required before deployment.",
+      "bluff_sounds_like": "Says the model 'performed well in testing' with no named reviewer, no threshold, and no mention of who had authority to greenlight production use."
+    },
+    {
+      "question": "You get paged at 2am because a feed dropped \u2014 whose permission do you need to restart or reroute it, and who do you notify?",
+      "real_answer_sounds_like": "Gives a specific escalation path, names a hospital IT contact or on-call approver, and describes what they check first (e.g., ADT segment) before acting.",
+      "bluff_sounds_like": "Says 'I'd just fix it myself' with no mention of hospital-side coordination, escalation, or any permission required to touch a live feed."
+    },
+    {
+      "question": "Who reviewed and adjudicated disagreements in your clinical extraction evaluation \u2014 a clinician, a compliance officer, someone else?",
+      "real_answer_sounds_like": "Names a specific clinician reviewer or adjudication panel, describes the disagreement resolution process and how it fed back into model iteration.",
+      "bluff_sounds_like": "Says 'we checked accuracy against a test set' with no clinician involvement, no adjudication process, and no named reviewer."
+    }
+  ],
+  "_meta": {
+    "model": "claude-sonnet-5",
+    "votes": 3,
+    "role_counts": [
+      2,
+      2,
+      2
+    ],
+    "verdicts": [
+      "does_not_make_sense",
+      "does_not_make_sense",
+      "does_not_make_sense"
+    ],
+    "unanimous_roles": true,
+    "unanimous_verdict": true,
+    "won": {
+      "roles": 2,
+      "verdict": "does_not_make_sense"
+    }
+  }
+}

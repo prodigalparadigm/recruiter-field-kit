@@ -1,0 +1,39 @@
+{
+  "fixture": "healthtech_clinical_ai_lead.md",
+  "source": "Wholly synthetic. Written for this repo as the bundling fixture; not a real posting, not based on one.",
+  "defends": "Rule 4's verdict clause: two labour markets bundled AND a rate that prices only one of them means does_not_make_sense. Erosion-verified -- remove that clause from rule 4 and all three votes flip to makes_sense_with_edits.",
+  "practitioner_read": "n/a - synthetic. Replaces a real req that was too distinctive to publish even anonymised.",
+  "roles_bundled_count": {
+    "min": 2,
+    "max": 3
+  },
+  "sanity_verdict": "does_not_make_sense",
+  "verdict_basis": "Two labour markets bundled and the posted salary prices only one of them.",
+  "a_role_must_mention_any_of": [
+    [
+      "interop",
+      "integration",
+      "HL7",
+      "FHIR",
+      "interface"
+    ],
+    [
+      "NLP",
+      "machine learning",
+      "ML",
+      "model",
+      "data scien"
+    ]
+  ],
+  "must_appear_any_of": [
+    [
+      "140",
+      "155",
+      "salary",
+      "band",
+      "prices"
+    ]
+  ],
+  "notes": "Deliberately contains no recruiter covering note, no residency clause and no unusual stack combination -- nothing that could fingerprint a real employer. The two markets are far apart on purpose: if the merge test ever collapses these, it has stopped working entirely.",
+  "does_not_defend": "Rule 1's merge/delete/capacity machinery. Erosion-verified the other way: strip those tests and this fixture still passes, because HL7/FHIR interop versus clinical NLP is obvious enough that any model splits it. The machinery is defended by oem_enablement_program_lead (capacity beats adjacency) and healthinsurer_ai_governance_lead (a market hidden in a late section)."
+}

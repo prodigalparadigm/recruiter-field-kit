@@ -157,12 +157,17 @@ change validated against one model hides the other's failure mode — that is ho
 cap sat mis-tuned to Sonnet for a week without anything catching it.
 
 
+Each fixture is **erosion-verified**: the rule it defends is removed from the prompt and the
+fixture must then fail. A fixture that passes with its own rule switched off is decoration.
+That check is how `healthtech_clinical_ai_lead` was found to defend the verdict clause rather
+than the bundling machinery it was written for.
+
 **Each fixture defends one rule** — it exists because it is the case that taught the rule,
 and its sidecar asserts the thing that would break if the rule eroded:
 
 | Fixture | Defends |
 |---|---|
-| `finserv_ai_automation_developer` | bundling: two markets at a rate that prices one |
+| `healthtech_clinical_ai_lead` | the verdict clause: two markets at a rate that prices one |
 | `healthinsurer_ai_governance_lead` | enablement is its own labour market |
 | `oem_enablement_program_lead` | capacity is not skill adjacency |
 | `enterprise_ai_training_specialist` | technology timeline: name the ceiling *and* the substitute |

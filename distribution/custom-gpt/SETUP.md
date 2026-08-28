@@ -44,8 +44,8 @@ work from the summary.* Keep that line if you edit anything.
 
 ## Before you publish it publicly
 
-Run `tests/fixtures/finserv_ai_automation_developer.md` through the GPT and check four
-things against `tests/fixtures/finserv_ai_automation_developer.expected.json`:
+Run `tests/fixtures/healthtech_clinical_ai_lead.md` through the GPT and check four
+things against `tests/fixtures/healthtech_clinical_ai_lead.expected.json`:
 
 - **2 labour markets**, not 1 and not 4
 - **`does_not_make_sense`**, and it names the rate covering only one of them

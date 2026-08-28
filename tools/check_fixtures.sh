@@ -9,7 +9,7 @@ fail=0; n=0
 
 shopt -s nullglob
 for out in tests/recorded/*.json; do
-  base=$(basename "$out" .json)            # e.g. finserv_ai_automation_developer.claude-opus-5
+  base=$(basename "$out" .json)            # e.g. healthtech_clinical_ai_lead.claude-opus-5
   fixture=${base%%.*}
   exp="tests/fixtures/${fixture}.expected.json"
   n=$((n+1))
