@@ -760,6 +760,71 @@ DEFAULT_MODEL = "claude-sonnet-5"
 DEFAULT_VOTES = 3
 
 
+def combined_rules():
+    """Both passes in one prompt, for the path a human actually takes: one copy, one paste,
+    one report. The split exists because format rules lost to analytical rules when they
+    shared a prompt -- whether that is still true is an empirical question, and the fixtures
+    can answer it. Built from the same rule text as the split passes so it cannot drift."""
+    analysis = ANALYSE_RULES.split("Return ONE JSON object")[0].rstrip()
+    # rules 8 and 9 live inside COMPOSE_RULES between its preamble and its output contract
+    tail = COMPOSE_RULES.split("Rules:\n\n", 1)[1].split("You will be given", 1)[0].rstrip()
+    return (analysis + "\n\n" + tail + """
+
+Do the whole job in one answer: name the markets, sort the skills, read the seniority,
+reach the verdict, then write the screening questions and the client email from what you
+just decided. Do not stop halfway and do not ask whether to continue.
+
+BEFORE YOU ANSWER, CHECK THESE FOUR. They are the ones that get dropped when the analysis
+has taken all the attention, and the email is the part the recruiter actually sends.
+
+1. "fix" is a COMPLETE EMAIL, ready to paste and send to the client -- greeting, the
+   substance, the ask, sign-off. It is NOT a note about the email, NOT a one-line
+   instruction to the recruiter, NOT a summary of what the email should say. If what you
+   wrote is under a hundred words and the verdict is below makes_sense, you have written a
+   label instead of the deliverable. Write the email. Keep it near 250 words and under 300 --
+   complete, but a recruiter forwards a short email and rewrites a long one.
+2. If the verdict is anything below makes_sense, "fix" contains these three labels
+   VERBATIM, on their own lines: "Must have - I will not submit without these",
+   "Strong plus", "Genuinely optional". Count them. Three.
+3. If the verdict IS makes_sense, do the opposite: no ranked bar, just the short honest
+   note.
+4. There are at least three entries in how_to_tell_in_ten_minutes, each with a question, a
+   real-answer example and a bluff example, and most of them name a thing the candidate had
+   to get past.
+
+Return ONE JSON object and nothing else:
+
+{
+  "title_as_posted": str,
+  "roles_bundled": [{"role": str, "evidence": [str, ...]}],
+  "core_role": str,
+  "skills": {
+    "must_have":   [{"skill": str, "why": str}],
+    "should_have": [{"skill": str, "why": str}],
+    "nice_to_have":[{"skill": str, "why": str}],
+    "decorative":  [{"skill": str, "why": str}]
+  },
+  "seniority_read": str,
+  "person_portrait": str,
+  "how_to_tell_in_ten_minutes": [
+    {"question": str, "real_answer_sounds_like": str, "bluff_sounds_like": str}
+  ],
+  "red_flags_for_recruiter": [str, ...],
+  "sanity": {
+    "verdict": "does_not_make_sense | makes_sense_with_edits | makes_sense",
+    "problems": [str, ...],
+    "fix": str,
+    "questions_to_ask_the_client": [str, ...]
+  }
+}""")
+
+
+def decode_combined(jd_text, model=DEFAULT_MODEL):
+    """One call, no voting -- the shape a human gets from a single paste."""
+    prompt = dated(combined_rules()) + "\n\n--- JOB DESCRIPTION AS RECEIVED ---\n" + jd_text.strip() + "\n--- END ---\n"
+    return _call(prompt, model)
+
+
 def build_prompt(jd_text):
     return dated(ANALYSE_RULES) + "\n\n--- JOB DESCRIPTION AS RECEIVED ---\n" + jd_text.strip() + "\n--- END ---\n"
 
@@ -1045,6 +1110,11 @@ def main():
         print(build_prompt(open(path).read()))
     elif cmd == "analyse":
         print(json.dumps(analyse(open(path).read(), model), indent=2))
+    elif cmd == "combined":
+        d = decode_combined(open(path).read(), model)
+        print(json.dumps(d, indent=2))
+    elif cmd == "combined-prompt":
+        print(dated(combined_rules()))
     elif cmd in ("decode", "run"):
         votes = int(sys.argv[4]) if len(sys.argv) > 4 else DEFAULT_VOTES
         d = decode(open(path).read(), model, votes)

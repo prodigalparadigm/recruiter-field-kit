@@ -23,6 +23,7 @@ SPLIT = "Return ONE JSON object"
 HERE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "references")
 GPT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..",
                    "distribution", "custom-gpt", "knowledge")
+ONE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "distribution", "one-paste")
 
 # (file, title, rules, gives, feed, next_step, context, report)
 PASSES = [
@@ -177,11 +178,64 @@ def machine(title, rules):
             f"*Generated from `tools/probe.py` — do not edit here.*\n\n```\n{rules}\n```\n")
 
 
+REPORT = """# <Title as posted> — decoded
+**Verdict:** <verdict, in plain words>
+
+## This is <one job / two jobs / three jobs>
+Each labour market, with the JD's own words as evidence. Then the one the day-to-day
+actually is, and why.
+
+## Skills
+**Must have** / **Should have** / **Nice to have** / **Decorative — ignore**, each with the
+one-line reason it sits there.
+
+## Seniority
+
+## Who this person is
+The portrait, as prose. Not a checklist. They/them.
+
+## How to tell in ten minutes
+**1. <question>**
+- Real answer sounds like: …
+- Bluff sounds like: …
+(three to six of these)
+
+## Red flags
+
+## Problems
+
+## Send this to the client
+The email, ready to paste.
+
+## Ask the client
+"""
+
+
+def one_paste():
+    body = probe.combined_rules().split("Return ONE JSON object")[0].rstrip()
+    return ("# The Recruiter's Field Kit — one-paste decoder\n\n"
+            "*Generated from `tools/probe.py`. Do not edit here.*\n\n"
+            "Copy everything inside the fence, paste it into any AI assistant, then paste a "
+            "job description underneath it in the same message.\n\n"
+            "```\n" + body +
+            "\n\nEstablish today's date before you begin and state it; several rules above turn "
+            "on how long a technology has existed. If you cannot, ask.\n\n"
+            "Return a readable markdown report in exactly this shape. No JSON, no preamble.\n\n"
+            + REPORT + "```\n")
+
+
 def main():
     check = "--check" in sys.argv
     os.makedirs(os.path.join(HERE, "json"), exist_ok=True)
     os.makedirs(GPT, exist_ok=True)
+    os.makedirs(ONE, exist_ok=True)
     stale = []
+    op = os.path.join(ONE, "PROMPT.md")
+    want_one = one_paste()
+    if (open(op).read() if os.path.exists(op) else None) != want_one:
+        stale.append("distribution/one-paste/PROMPT.md")
+        if not check:
+            open(op, "w").write(want_one)
     for fn, title, rules, gives, feed, nxt, context, report in PASSES:
         for path, want in ((os.path.join(HERE, fn), human(title, rules, gives, feed, nxt, context, report)),
                            (os.path.join(HERE, "json", fn), machine(title, rules)),
@@ -196,9 +250,9 @@ def main():
             print("FAIL: references/ is stale, re-run tools/export_references.py:")
             for f in stale: print("  -", f)
             return 1
-        print(f"PASS: prompts in sync across all surfaces ({len(PASSES) * 3} files).")
+        print(f"PASS: prompts in sync across all surfaces ({len(PASSES) * 3 + 1} files).")
     else:
-        print(f"wrote {len(PASSES) * 3} files" + (f" ({len(stale)} changed)" if stale else ""))
+        print(f"wrote {len(PASSES) * 3 + 1} files" + (f" ({len(stale)} changed)" if stale else ""))
     return 0
 
 
