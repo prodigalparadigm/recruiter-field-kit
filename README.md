@@ -21,23 +21,23 @@ candidate on the other end can't tell whether the JD is one job or three.
 
 ## How to use it
 
-### 1. Paste a prompt into Claude — no install, no key, no terminal
+### 1. One paste, any assistant — no install, no key, no account
 
-**This is the way most people should use this.** Everything the kit does is a prompt.
-Open [`references/01-decode-analysis.md`](references/01-decode-analysis.md), copy the
-block inside the code fence, paste it into Claude, then paste the job description under
-it. You get the decode back as JSON.
+**This is the way most people should use this.** Copy the block in
+[`distribution/one-paste/PROMPT.md`](distribution/one-paste/PROMPT.md), paste it into
+ChatGPT, Claude, Copilot or Gemini — a free account is fine — then paste a job description
+underneath it in the same message. You get the whole read back in one reply: the markets,
+the portrait, the screening questions, the verdict, and the email to the client.
 
-The other five passes work the same way, and each one tells you what to feed it:
+It is validated the same way everything else here is: **6 of 6 fixtures**, verdicts and
+role counts matching the two-pass reference path.
 
-| File | Does | Feed it |
-|---|---|---|
-| [`01-decode-analysis.md`](references/01-decode-analysis.md) | roles, skills, seniority, verdict | the JD |
-| [`02-decode-compose.md`](references/02-decode-compose.md) | screening questions + the client email | the JD + the analysis |
-| [`03-sourcing-kit.md`](references/03-sourcing-kit.md) | Boolean strings, one per market | the JD + the decode |
-| [`04-should-i-apply.md`](references/04-should-i-apply.md) | the candidate's answer | the decode + your own summary |
-| [`05-fit-score.md`](references/05-fit-score.md) | one profile scored | the decode + a pasted profile |
-| [`06-receipts.md`](references/06-receipts.md) | what someone has actually built | GitHub facts |
+One limit worth knowing: a single paste is a single sample, so there is no majority vote
+behind the role count. On a genuinely borderline req it can land differently on two runs —
+it says so when it is unsure, and that is the honest version of the answer.
+
+If you would rather run the passes separately, [`references/`](references/) holds each one
+as its own prompt, with the JSON contracts in [`references/json/`](references/json/).
 
 ### 2. Publish it as a Custom GPT — the zero-friction route for a recruiter
 
