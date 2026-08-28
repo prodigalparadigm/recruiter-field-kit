@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: No LinkedIn network surface
+      - name: No network path to LinkedIn
         run: ./tools/check_no_linkedin.sh
 
   fixtures:
@@ -21,3 +21,13 @@ jobs:
           python-version: "3.12"
       - name: Recorded decodes match schema and expectations
         run: ./tools/check_fixtures.sh
+
+  references:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: references/ matches the prompts in probe.py
+        run: python3 tools/export_references.py --check

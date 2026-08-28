@@ -357,6 +357,290 @@ def check_search(sr):
     return p
 
 
+MIRROR_RULES = """You are addressing the CANDIDATE, not the recruiter. They have a decode of a
+job description in front of them and they are deciding whether to spend an evening on this
+application. Your job is to save them the evening if it deserves saving.
+
+The decode is settled. Do not re-argue the verdict.
+
+Rules:
+
+1. Tell them FIRST whether this is one job or several, in one sentence, in plain words.
+   If the decode found three markets, the sentence is "this is three jobs in one posting"
+   -- not "the role appears to encompass multiple disciplines."
+
+2. Tell them which of the bundled markets they actually are, by name. If they are none of
+   them, say "none of them" and say it in the first line of that field. Do not soften it
+   into "partial alignment."
+
+3. THE HONEST SENTENCE is the deliverable. It is what they say out loud about the gap --
+   in their own voice, first person, no spin, no hedging, no "I'm a fast learner." It
+   should be the sentence that makes a good recruiter trust them and a bad one drop them,
+   because both outcomes save the evening. "I've integrated models other people trained;
+   I haven't trained and deployed one" is the shape. Never write a sentence that claims
+   more than the candidate's own words support.
+
+4. Cost the application honestly. If the decode says does_not_make_sense, tell them what
+   that means for them specifically: they would be interviewed against a bar the client
+   has not set, by a client who has not decided what they are hiring. That is not a fair
+   fight and it is worth naming.
+
+5. Never inflate to be kind. A candidate who applies to the wrong job loses more than a
+   candidate who is told no. If the answer is not this one, the honest kindness is
+   speed.
+
+6. What to ask BEFORE applying: the two or three questions that would change the answer.
+   Aim them at the recruiter, and make them answerable in an email.
+
+Return ONE JSON object and nothing else:
+
+{
+  "one_job_or_more": str,
+  "which_role_you_are": str,
+  "evidence_you_fit": [str],
+  "evidence_you_dont": [str],
+  "the_honest_sentence": str,
+  "what_to_ask_before_applying": [str],
+  "verdict": "apply | apply_with_eyes_open | not_this_one",
+  "why": str
+}"""
+
+
+FIT_RULES = """You score ONE candidate against a decoded job description, for the recruiter who
+is about to decide whether to spend a call on them.
+
+The profile below was PASTED IN BY THE RECRUITER -- their copy, their keystrokes. Nothing
+was fetched. You have only what is on the page: judge that, and say plainly where the page
+is silent rather than guessing what the person can probably do.
+
+Rules:
+
+1. Score against the CORE ROLE the decode identified, not against the whole bundled req.
+   Scoring against the bundle is how good candidates get rejected for not being three
+   people.
+
+2. OVER-CLAIM SIGNALS: a tool named with no project attached to it. "AWS Bedrock,
+   Kubernetes, LangChain" in a skills bar with nothing in the history that used them. Name
+   the specific tool and what is missing.
+
+3. UNDER-CLAIM SIGNALS: a project described without naming the tool it obviously required.
+   These are the most valuable finding in the whole pass, because the candidate is being
+   screened out by keyword matching for work they actually did. Say what to ask to confirm
+   it.
+
+4. GAPS are only real if the core role needs them. A gap against a market the JD bundled
+   but the client is not actually hiring is not a gap; say so.
+
+5. HONESTY READ: if the candidate's own language is measured -- "some exposure to", "I've
+   used it once" -- say plainly that measured language about a real thing is a better
+   signal than "expert" with nothing behind it. Do not treat modesty as weakness.
+
+6. THE SENTENCE FOR THE CLIENT is the deliverable: one sentence the recruiter can send
+   when submitting or declining this person, in their own plain register. It must be
+   defensible if the client pushes back.
+
+7. The questions must be for THIS person -- aimed at the specific gap or over-claim you
+   found, not the generic screen from the decode.
+
+Return ONE JSON object and nothing else:
+
+{
+  "evidence_for": [{"claim": str, "evidence": str}],
+  "evidence_against": [str],
+  "gaps": [str],
+  "over_claim_signals": [{"signal": str, "why": str}],
+  "under_claim_signals": [{"signal": str, "why": str}],
+  "questions_for_this_person": [{"question": str, "why_this_person": str}],
+  "honesty_note": str,
+  "verdict": "strong | worth_a_call | not_this_one",
+  "sentence_for_the_client": str
+}"""
+
+
+def _with_decode(rules, jd_text, analysis, person, person_label):
+    return (rules + "\n\n--- JOB DESCRIPTION AS RECEIVED ---\n" + jd_text.strip()
+            + "\n--- END ---\n\n--- DECODE (settled) ---\n"
+            + json.dumps({k: v for k, v in analysis.items() if k != "_meta"}, indent=2)
+            + f"\n--- END ---\n\n--- {person_label} (pasted by a human, not fetched) ---\n"
+            + person.strip() + "\n--- END ---\n")
+
+
+def should_i_apply(jd_text, analysis, candidate, model):
+    return _call(_with_decode(MIRROR_RULES, jd_text, analysis, candidate,
+                              "THE CANDIDATE, IN THEIR OWN WORDS"), model)
+
+
+def fit_score(jd_text, analysis, profile, model):
+    return _call(_with_decode(FIT_RULES, jd_text, analysis, profile,
+                              "CANDIDATE PROFILE / RESUME"), model)
+
+
+CAVEAT = ("Absence of public code is not evidence of absence. Most professional work is "
+          "private, under NDA, or inside a company's own repos. A thin public profile "
+          "tells you nothing about whether someone can build; a rich one only tells you "
+          "about the part they chose to publish.")
+
+RECEIPTS_RULES = """You describe what a candidate has actually built, from facts already fetched
+from GitHub's public API. Your reader is a recruiter who cannot read code.
+
+Rules:
+
+1. Plain English, one short paragraph per notable repo: what it does, what it is built
+   with, and whether it looks maintained or abandoned. No code, no jargon the recruiter
+   cannot repeat on a call.
+
+2. Judge only what the facts show. If a repo has no README you may say the README is
+   missing; you may NOT guess what the code does from the name. Say "the name suggests X
+   but there is nothing here to confirm it."
+
+3. Forks are not work. Say plainly how many originals there are versus forks, and describe
+   originals only, unless a fork has substantial original commits -- which you cannot tell
+   from these facts, so say that too.
+
+4. Tests and CI presence is a signal about habits, not talent. Report it flatly.
+
+5. Recency: a repo untouched for two years is a finished thing or an abandoned thing.
+   Say which the evidence supports, or say you cannot tell.
+
+6. NEVER infer seniority, employability, or worth from a GitHub profile. You are
+   describing artifacts, not scoring a person.
+
+Return ONE JSON object and nothing else:
+
+{
+  "summary": str,
+  "languages": [str],
+  "notable_repos": [{"name": str, "what_it_is": str, "signals": str}],
+  "habits": str,
+  "what_this_does_not_tell_you": str
+}"""
+
+
+def _gh(path, token=None, raw=False):
+    import urllib.request, urllib.error
+    req = urllib.request.Request("https://api.github.com" + path)
+    req.add_header("Accept", "application/vnd.github.raw" if raw else "application/vnd.github+json")
+    req.add_header("User-Agent", "recruiter-field-kit")
+    if token:
+        req.add_header("Authorization", "Bearer " + token)
+    try:
+        with urllib.request.urlopen(req, timeout=30) as r:
+            body = r.read().decode("utf-8", "replace")
+            return (body if raw else json.loads(body)), None
+    except urllib.error.HTTPError as e:
+        if e.code == 403 and e.headers.get("X-RateLimit-Remaining") == "0":
+            return None, ("rate_limited", "GitHub's unauthenticated limit is 60 requests/hour. "
+                          "Set GITHUB_TOKEN for 5000/hour.")
+        if e.code == 404:
+            return None, ("not_found", f"GitHub returned 404 for {path}")
+        return None, ("http_error", f"{e.code} for {path}")
+    except Exception as e:
+        return None, ("error", str(e))
+
+
+def receipts_fetch(user, token=None, top_n=5):
+    """Public API only, and only for a username the candidate put on their own profile."""
+    repos, err = _gh(f"/users/{user}/repos?per_page=100&sort=updated", token)
+    if err:
+        return {"user": user, "error": err[0], "detail": err[1], "caveat": CAVEAT}
+
+    originals = [r for r in repos if not r.get("fork")]
+    forks = [r for r in repos if r.get("fork")]
+    facts = {
+        "user": user,
+        "public_repos_total": len(repos),
+        "originals": len(originals),
+        "forks": len(forks),
+        "caveat": CAVEAT,
+        "repos": [],
+    }
+    if not originals:
+        facts["note"] = (f"{user} has {len(repos)} public repositories, {len(forks)} of them forks, "
+                         f"and no original public repos. " + CAVEAT)
+        return facts
+
+    ranked = sorted(originals, key=lambda r: (r.get("stargazers_count", 0),
+                                              r.get("pushed_at") or ""), reverse=True)[:top_n]
+    for r in ranked:
+        name = r["name"]
+        readme, rerr = _gh(f"/repos/{user}/{name}/readme", token, raw=True)
+        tree, terr = _gh(f"/repos/{user}/{name}/git/trees/{r.get('default_branch','main')}?recursive=1", token)
+        paths = [t["path"] for t in (tree or {}).get("tree", [])] if not terr else []
+        facts["repos"].append({
+            "name": name,
+            "description": r.get("description"),
+            "language": r.get("language"),
+            "stars": r.get("stargazers_count", 0),
+            "created_at": r.get("created_at"),
+            "pushed_at": r.get("pushed_at"),
+            "archived": r.get("archived", False),
+            "readme_present": rerr is None and bool(readme),
+            "readme_chars": len(readme) if (rerr is None and readme) else 0,
+            "readme_excerpt": (readme[:1500] if (rerr is None and readme) else None),
+            "has_ci": any(x.startswith(".github/workflows/") for x in paths),
+            "has_tests": any(re.search(r"(^|/)(tests?|spec)s?/", x) or
+                             re.search(r"(^|/)test_[^/]+\.py$", x) for x in paths),
+            "file_count": len(paths) or None,
+        })
+    return facts
+
+
+def receipts(user, model, token=None, top_n=5):
+    facts = receipts_fetch(user, token, top_n)
+    if facts.get("error"):
+        return facts
+    if not facts.get("repos"):
+        return facts
+    prompt = (RECEIPTS_RULES + "\n\n--- FACTS FROM GITHUB'S PUBLIC API ---\n"
+              + json.dumps(facts, indent=2)[:60000] + "\n--- END ---\n")
+    out = _call(prompt, model)
+    out["facts"] = facts
+    out["caveat"] = CAVEAT
+    return out
+
+
+SIA_VERDICTS = {"apply", "apply_with_eyes_open", "not_this_one"}
+FIT_VERDICTS = {"strong", "worth_a_call", "not_this_one"}
+
+
+def check_mirror(d):
+    p = []
+    for f in ("one_job_or_more", "which_role_you_are", "the_honest_sentence", "why"):
+        if not isinstance(d.get(f), str) or not d.get(f):
+            p.append(f"{f} missing")
+    for f in ("evidence_you_fit", "evidence_you_dont", "what_to_ask_before_applying"):
+        if not isinstance(d.get(f), list):
+            p.append(f"{f} must be a list")
+    if d.get("verdict") not in SIA_VERDICTS:
+        p.append(f"verdict must be one of {sorted(SIA_VERDICTS)}")
+    sent = d.get("the_honest_sentence", "")
+    if len(sent.split()) > 60:
+        p.append(f"the_honest_sentence is {len(sent.split())} words -- it is one sentence to say out loud")
+    # rule 3: it is the candidate speaking
+    if sent and not re.search(r"\b(I|I've|I'm|my|me)\b", sent):
+        p.append("the_honest_sentence is not in the candidate's first-person voice (rule 3)")
+    return p
+
+
+def check_fit(d):
+    p = []
+    for f in ("evidence_for", "evidence_against", "gaps", "over_claim_signals",
+              "under_claim_signals", "questions_for_this_person"):
+        if not isinstance(d.get(f), list):
+            p.append(f"{f} must be a list")
+    if d.get("verdict") not in FIT_VERDICTS:
+        p.append(f"verdict must be one of {sorted(FIT_VERDICTS)}")
+    sc = d.get("sentence_for_the_client", "")
+    if not sc:
+        p.append("sentence_for_the_client missing -- it is the deliverable (rule 6)")
+    elif len(sc.split()) > 70:
+        p.append(f"sentence_for_the_client is {len(sc.split())} words; it is one sentence")
+    for i, q in enumerate(d.get("questions_for_this_person") or []):
+        if not isinstance(q, dict) or not q.get("question") or not q.get("why_this_person"):
+            p.append(f"questions_for_this_person[{i}] needs question + why_this_person (rule 7)")
+    return p
+
+
 VERDICTS = {"does_not_make_sense", "makes_sense_with_edits", "makes_sense"}
 GENDERED = re.compile(r"\b(she|he|her|hers|him|his|herself|himself)\b", re.I)
 BAR = ("Must have", "Strong plus", "Genuinely optional")
@@ -606,6 +890,30 @@ def main():
             return 1
         print(f"strings parse — {len(sr['per_market'])} market(s), "
               f"{sr['_meta']['attempts']} attempt(s)", file=sys.stderr)
+    elif cmd in ("apply", "fit"):
+        d = json.load(open(path))
+        jd = open(sys.argv[3]).read()
+        person = open(sys.argv[4]).read()
+        model = sys.argv[5] if len(sys.argv) > 5 else DEFAULT_MODEL
+        if cmd == "apply":
+            out = should_i_apply(jd, d, person, model); probs = check_mirror(out)
+        else:
+            out = fit_score(jd, d, person, model); probs = check_fit(out)
+        print(json.dumps(out, indent=2))
+        if probs:
+            print(f"{cmd.upper()} FAIL:", file=sys.stderr)
+            for x in probs: print("  -", x, file=sys.stderr)
+            return 1
+        print(f"{cmd} ok — verdict={out['verdict']}", file=sys.stderr)
+    elif cmd == "receipts":
+        # `path` is the username here -- one the candidate put on their own profile.
+        out = receipts(path, sys.argv[3] if len(sys.argv) > 3 else DEFAULT_MODEL,
+                       os.environ.get("GITHUB_TOKEN"))
+        print(json.dumps(out, indent=2))
+        print("\n" + CAVEAT, file=sys.stderr)
+        if out.get("error"):
+            print(f"[{out['error']}] {out.get('detail')}", file=sys.stderr)
+            return 1
     elif cmd == "check":
         d = json.load(open(path))
         probs = check_schema(d)
