@@ -1,0 +1,134 @@
+{
+  "title_as_posted": "Platform Support Engineer, Developer Tools",
+  "roles_bundled": [
+    {
+      "role": "Developer-facing platform support engineer (reproduce, diagnose, fix, document, escalate, and feed data back to product)",
+      "evidence": [
+        "Reproduce and diagnose customer-reported issues against our API, SDKs and CLI",
+        "Fix bugs you can fix; write the reproduction and the diagnosis for the ones you can't",
+        "Own the escalation path into engineering, including the on-call handoff",
+        "Keep the troubleshooting documentation current as the platform ships",
+        "Feed recurring issues back to product as a prioritized list, with volume attached"
+      ]
+    }
+  ],
+  "core_role": "A single labour market: a technical support/triage engineer for a developer platform who can also write real fixes in Python or TypeScript. The doc-maintenance and product-feedback bullets are slices of this one job, not separate hires -- they fail the DELETE test (removing them still leaves the same support engineer, sourced the same way, just with a thinner deliverable list). The bug-fixing requirement also survives MERGE: 'support engineer who codes' is an established, well-understood devtools hiring pattern (Stripe/Twilio/Postman-style Support/DevEx Engineer), not an SWE role smuggled in under a support title.",
+  "skills": {
+    "must_have": [
+      {
+        "skill": "Reproducing and diagnosing bugs against a developer-facing API, SDK, and CLI",
+        "why": "This is the entire job -- named first in responsibilities and required as 3+ years."
+      },
+      {
+        "skill": "Python or TypeScript, read/write, to the level of shipping a fix",
+        "why": "Explicitly required: 'well enough to reproduce a bug and propose the fix'; distinguishes this from a pure ticket-triage role."
+      },
+      {
+        "skill": "Owning an escalation path and on-call handoff into engineering",
+        "why": "Named as a direct responsibility and a required qualification ('experience working an on-call rotation')."
+      },
+      {
+        "skill": "Talking a frustrated engineer down on a live technical call",
+        "why": "Explicitly required and central to the customer-facing half of the job."
+      }
+    ],
+    "should_have": [
+      {
+        "skill": "Writing and maintaining troubleshooting documentation",
+        "why": "Named responsibility ('keep the troubleshooting documentation current'), but it is upkeep work layered on the core support function, not a separate writer's job."
+      },
+      {
+        "skill": "Turning ticket volume into a prioritized backlog for product",
+        "why": "Named responsibility; requires enough pattern-recognition across tickets to make the list credible, but is reporting, not a data-science function."
+      }
+    ],
+    "nice_to_have": [
+      {
+        "skill": "Postgres, Kubernetes, Terraform familiarity",
+        "why": "Listed explicitly as 'nice to have,' tied to the client's specific stack rather than the core support function."
+      },
+      {
+        "skill": "Prior work at a company selling to developers",
+        "why": "Explicitly listed as nice to have; domain fluency, not a hard skill."
+      },
+      {
+        "skill": "Written public technical documentation or troubleshooting guides",
+        "why": "Explicitly nice to have; overlaps with but is not required for the must-have doc-maintenance duty."
+      }
+    ],
+    "decorative": []
+  },
+  "seniority_read": "Mid-to-senior IC. 3+ years is a modest floor, but the bar of 'fix bugs, not just file tickets,' ownership of the escalation path, and on-call experience push this above an entry-level support-desk hire. $135k-$160k + equity is consistent with a senior support/DevEx engineer at a mid-size B2B SaaS company -- the band and the described work match; this is not a title that undersells senior-level responsibility, nor a band inflated above the work.",
+  "person_portrait": "They are currently a Support Engineer II or 'Developer Support Engineer' at a mid-size devtools or API company -- something like a payments, auth, or infra-as-a-service vendor -- and their last title before that was either the same role at a smaller shop or a backend engineering role they moved out of because they liked talking to customers more than they liked sprint planning. They can write a Python or Node repro script from a garbled Slack message in twenty minutes, and they have a war story about chasing a rate-limit edge case through three time zones of on-call handoff notes before finding it was a stale SDK cache. On the phone they talk fast about the ticket, slow about the customer's actual problem, and they will ask you, unprompted, what the on-call rotation actually looks like and whether 'own the escalation path' means they get to say no to engineering or just get told no by them.",
+  "red_flags_for_recruiter": [
+    "'Fix bugs you can fix' has no stated ceiling -- the client could mean 'patch a null check' or 'ship a real feature fix,' and that changes whether you're sourcing a support engineer or a backend engineer moonlighting as one. Ask for a real example before running the search.",
+    "No stated ticket volume, team size, or current backlog size -- 'the backlog... is real and growing' is an admitted problem with no number attached, so you can't tell a candidate what they're walking into on day one.",
+    "'Own the escalation path into engineering' implies the person sets process for how engineering intakes issues -- confirm this is authority the client will actually back them on, since a single IC hire at this level and pay can't unilaterally impose process on an engineering org that doesn't already agree to it."
+  ],
+  "sanity": {
+    "verdict": "makes_sense",
+    "problems": [
+      "Scope spans three surfaces (API, SDK, CLI) with no stated priority among them -- normal for this kind of role, but worth naming on the call.",
+      "The line between 'triage-and-route' and 'write real fixes' is not quantified, which affects who you'd shortlist at the margin (pure support vs. support-with-strong-eng-background) -- ask, don't assume.",
+      "The escalation-ownership language could read as process authority over engineering; worth clarifying it means routing/documentation standards, not mandate power, before promising a candidate that authority."
+    ],
+    "questions_to_ask_the_client": [
+      "Roughly what fraction of your current backlog is 'we can fix it ourselves' vs 'needs to go to engineering'? That tells us how deep the coding bar really is.",
+      "What's current ticket/incident volume, and is there an existing support engineer we're backfilling or augmenting, or is this the first hire in this seat?",
+      "When you say 'own the escalation path,' does this person have the standing to set intake requirements engineering has to follow, or are they routing within a process engineering already owns?"
+    ],
+    "fix": "This one makes sense as posted -- I'll run the search for a support engineer who can reproduce and fix real bugs in Python/TypeScript, owns the on-call escalation into engineering, and can hold a technical conversation with a frustrated customer engineer. Before I start sourcing, two things: what fraction of your current backlog gets fixed in-seat versus routed to engineering, so I calibrate how strong the coding bar needs to be at the margin; and when you say this person 'owns the escalation path,' do they get to set intake standards engineering has to follow, or are they routing inside a process engineering already owns? Also useful: current ticket/incident volume and whether this backfills an existing seat or is the first hire. I'll have a shortlist moving once I hear back."
+  },
+  "how_to_tell_in_ten_minutes": [
+    {
+      "question": "Walk me through a bug you reproduced against an API or SDK that got kicked back the first time as 'not reproducible.' Who told you that, and what did you have to change to get it accepted?",
+      "real_answer_sounds_like": "Names the specific SDK version and environment mismatch that was hiding the bug, says a senior engineer initially closed it as 'works on my machine,' and describes the exact repro artifact (script, log, env diff) that got it reopened and accepted.",
+      "bluff_sounds_like": "Says 'I just tried it a few times and eventually it happened' with no mention of who disputed it or what evidence changed anyone's mind."
+    },
+    {
+      "question": "Tell me about a fix you actually shipped, not just diagnosed. Who reviewed the PR, and what did they push back on before it merged?",
+      "real_answer_sounds_like": "Describes the reviewer's specific concern (e.g., a missing null check that could break another endpoint), the back-and-forth, and what changed in the second pass.",
+      "bluff_sounds_like": "'My code was clean, it went straight through' -- no reviewer, no comments, no friction."
+    },
+    {
+      "question": "Describe an on-call handoff that went sideways. Whose sign-off did you need to close the incident or hand it to the next engineer?",
+      "real_answer_sounds_like": "Names the on-call lead or runbook step that required explicit closure approval, and what the incoming engineer needed from the handoff notes to accept the pass.",
+      "bluff_sounds_like": "'I just handled it and moved on' with no named approver or handoff artifact."
+    },
+    {
+      "question": "Tell me about a customer engineer who didn't believe your diagnosis. Who internally did you have to get to back you before you gave the customer an answer?",
+      "real_answer_sounds_like": "Describes escalating to a senior engineer or team lead for a sanity check before committing to the customer, and what that person made them verify first.",
+      "bluff_sounds_like": "'I just told them what I found' -- no internal check, no one who could have overruled them."
+    },
+    {
+      "question": "When you updated troubleshooting docs, who had to sign off before they went live?",
+      "real_answer_sounds_like": "Names a doc owner or eng lead who reviewed via PR, and a specific correction they required.",
+      "bluff_sounds_like": "'I just edited the wiki, nobody really checks it.'"
+    },
+    {
+      "question": "Tell me about a prioritized ticket list you handed to product. Did they push back on your ranking, and who did you have to convince?",
+      "real_answer_sounds_like": "Names the PM, the specific pushback (e.g., disputing volume numbers), and what additional data settled it.",
+      "bluff_sounds_like": "'I sent the list over, don't really know what happened after that.'"
+    }
+  ],
+  "_meta": {
+    "model": "claude-sonnet-5",
+    "votes": 3,
+    "role_counts": [
+      1,
+      1,
+      1
+    ],
+    "verdicts": [
+      "makes_sense",
+      "makes_sense_with_edits",
+      "makes_sense"
+    ],
+    "unanimous_roles": true,
+    "unanimous_verdict": false,
+    "won": {
+      "roles": 1,
+      "verdict": "makes_sense"
+    }
+  }
+}

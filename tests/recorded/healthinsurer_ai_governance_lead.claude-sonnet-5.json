@@ -1,0 +1,165 @@
+{
+  "title_as_posted": "IT Project Management Senior Advisor (AI Governance Lead)",
+  "roles_bundled": [
+    {
+      "role": "Enterprise AI Governance / Responsible AI Policy Lead",
+      "evidence": [
+        "Draft, maintain, and operationalize enterprise Responsible AI policies, standards, and procedures",
+        "Design and continuously improve an AI risk tiering model (e.g., Tier 0\u20134)",
+        "Serve as the primary convener across Security, Privacy, Compliance, Legal, Risk Management, Audit, and Data Governance",
+        "Define and run governance decisioning forums (e.g., risk review boards, architectural review checkpoints, tier adjudication)",
+        "Maintain documentation and evidence to support internal/external audits, regulatory inquiries, and executive reporting"
+      ]
+    },
+    {
+      "role": "Change Management / Enablement (training, comms, communities of practice)",
+      "evidence": [
+        "Create training and communications that drive consistent governance adoption across product, engineering, and business teams.",
+        "Build communities of practice and \"governance champions\" within delivery teams to scale the operating model."
+      ]
+    }
+  ],
+  "core_role": "A senior AI/Responsible-AI governance owner who writes and operationalizes enterprise policy, designs the risk-tiering and control model, convenes Security/Privacy/Compliance/Legal/Risk/Audit/Data Governance as the standard-setter, and runs the governance forums and KPI/audit reporting that keep AI delivery inside the guardrails. Block 6 (training, comms, communities of practice) is a distinct enablement/change-management market bolted onto this policy role rather than a natural extension of it -- the DELETE test leaves the core governance job intact without it, and the MERGE test fails because policy/legal facilitation skill and instructional-design/comms delivery skill are not commonly the same person at this seniority.",
+  "skills": {
+    "must_have": [
+      {
+        "skill": "Responsible AI policy authorship (standards, definitions, approvals, exception handling)",
+        "why": "Named as the first and most detailed responsibility block; this is the deliverable the role is titled for."
+      },
+      {
+        "skill": "AI risk tiering and controls-mapping design",
+        "why": "Explicit named deliverable: build and continuously improve a Tier 0-4 model with control sets per tier."
+      },
+      {
+        "skill": "Cross-functional facilitation across Security, Privacy, Compliance, Legal, Risk, Audit, Data Governance",
+        "why": "JD names the person as 'primary convener' across seven distinct corporate functions -- this is the core operating skill, not a bullet."
+      },
+      {
+        "skill": "Governance operations: intake processes, review boards, KPI/exception tracking",
+        "why": "Section 4 is a standalone operational deliverable set (forums, intake, metrics) the person is expected to run, not just advise on."
+      },
+      {
+        "skill": "Audit-readiness documentation for regulators and executives",
+        "why": "Explicitly named as an ongoing responsibility feeding internal/external audits and executive reporting."
+      }
+    ],
+    "should_have": [
+      {
+        "skill": "Model governance artifact literacy (model cards, datasheets, evaluation protocols, drift monitoring)",
+        "why": "Named as reusable patterns the role must establish, but execution is delegated to platform/engineering, not the governance lead."
+      },
+      {
+        "skill": "Health-insurance-specific regulatory knowledge (HIPAA, NAIC AI Model Bulletin, state insurance AI rules)",
+        "why": "Client is a large US health insurer and JD references 'regulatory expectations' repeatedly, but never names the actual regulatory scope -- a real gap the recruiter must close."
+      },
+      {
+        "skill": "Embedding governance into engineering workflow (CI/CD gates, policy-as-code)",
+        "why": "Described as a partnership activity with platform/engineering leaders, not something the governance lead builds themselves."
+      },
+      {
+        "skill": "Training design / curriculum and communities-of-practice building",
+        "why": "This is block 6's skillset -- flagged because it is a second labour market bundled in, not because it belongs to the core governance hire."
+      }
+    ],
+    "nice_to_have": [
+      {
+        "skill": "Hands-on execution of bias/fairness, explainability, robustness testing",
+        "why": "JD says 'establish requirements and templates for' these, which reads as policy-writing rather than hands-on data science, but the line is genuinely ambiguous."
+      },
+      {
+        "skill": "Policy-as-code tooling experience",
+        "why": "JD itself hedges with 'where feasible,' signalling this is aspirational, not a bar."
+      }
+    ],
+    "decorative": [
+      {
+        "skill": "\"Policy craftsmanship\"",
+        "why": "Restates the must-have policy-authorship skill in competency-bucket language; adds nothing new to screen on."
+      },
+      {
+        "skill": "\"Enablement mindset\" / \"paved roads\"",
+        "why": "A vibe descriptor for the same risk-tiering/fast-path work already covered in section 2."
+      },
+      {
+        "skill": "\"Operational rigor\"",
+        "why": "Restates governance-cadence and audit-readiness bullets already listed as must-haves; disposition language, not a distinct skill."
+      }
+    ]
+  },
+  "seniority_read": "Reads as a Director-or-above GRC/AI-policy leader in practice -- the job asks this person to be the standard-setter that Legal, Compliance, Audit, and Risk defer to -- but the JD states no explicit years-of-experience bar, certification, or prior-title requirement. Given the AI-specific framing (risk tiering, model governance artifacts, responsible AI assurance), a client screening this will most likely want AI/model-governance-specific tenure, not generic policy or generic PM experience, and that population with real convening authority over Legal/Audit/Risk is small.",
+  "person_portrait": "They currently sit inside a large regulated enterprise -- a health insurer, bank, or pharma company -- with a title like 'AI Governance Lead,' 'Model Risk Governance Manager,' or 'Responsible AI Program Lead,' reporting into a CDO, Chief Risk Officer, or enterprise risk/compliance function rather than into engineering. Their last two roles involved writing model-risk or AI-use policy and standing up a tiering/approval process from scratch. Their war story is getting a risk review board actually adopted -- getting Legal and Compliance to stop blocking every AI use case and instead sign off on a fast-path for low-risk work, usually after months of working sessions. On the phone they talk fluently about NIST AI RMF, ISO 42001, model cards, and audit evidence trails, and they can describe exactly how they got seven different stakeholder groups into one room and out with a decision. They are not typically the person who also designs training curricula or runs communities of practice -- that work, when it existed at their last job, was handed to an enablement/L&D partner.",
+  "red_flags_for_recruiter": [
+    "No rate posted for a role that requires standing to convene Legal, Compliance, Audit, and Risk at a large regulated enterprise -- rate will determine whether the client can actually attract that seniority.",
+    "No stated contract duration -- unclear whether this is a short interim assignment or a multi-year build, which matters because a short, cheaply-priced contract cannot make someone a peer of Legal/Audit/Risk leadership (authority mismatch risk under rule 5).",
+    "Title 'IT Project Management Senior Advisor' is a generic PM job-code with 'AI Governance Lead' bolted on parenthetically -- likely means the client's internal leveling/budget was set for a PM req, not a policy/GRC director-level hire, and may underprice the actual work.",
+    "No explicit years-of-experience, certification, or credential bar anywhere in the JD -- nothing concrete to screen candidates against for seniority.",
+    "Change management / training / communities-of-practice (block 6) is a distinct enablement labour market bundled into a senior policy hire; if the client insists on both, this is really two hires.",
+    "Ambiguous whether 'Responsible AI Assurance' (bias/fairness, explainability, robustness testing) requires hands-on technical execution or only requirements-writing -- this decides whether you source a GRC/policy person or a technical AI-risk/data-science person."
+  ],
+  "sanity": {
+    "verdict": "makes_sense_with_edits",
+    "problems": [
+      "Change management/enablement work (training, comms, communities of practice) is a separate labour market bundled into a senior governance/policy role -- passes the DELETE test as removable without changing the core hire.",
+      "No rate and no contract duration stated for a role requiring cross-functional authority over Legal/Compliance/Audit/Risk -- an authority mismatch risk the recruiter cannot resolve without client input.",
+      "Title tag ('IT Project Management Senior Advisor') contradicts the actual seniority and specialization of the work described in the body.",
+      "No explicit years-of-experience or credential bar stated, leaving nothing concrete to screen seniority against despite the job clearly requiring significant tenure.",
+      "Ambiguity over whether 'Responsible AI Assurance' work is hands-on technical execution (data science) or policy/requirements-writing -- changes which market to search."
+    ],
+    "questions_to_ask_the_client": [
+      "What is the rate/band for this role, and is it a fixed-term contract, open-ended contract, or contract-to-hire?",
+      "What is the expected duration, and does the client's executive sponsorship give this person actual standing to set requirements for Legal, Compliance, Audit, and Risk, or is this an advisory-only role?",
+      "Is the training/communications/communities-of-practice work in block 6 meant for this same hire, or is there a separate enablement/L&D resource for that?",
+      "Does 'Responsible AI Assurance' require this person to personally run bias/fairness, explainability, and robustness testing, or only to write the requirements and templates other teams execute against?",
+      "What years of experience, certifications, or prior title level (e.g., Director of Model Risk, AI Governance Lead) is the client actually screening for?",
+      "Given the health-insurer client, which specific regulatory frameworks (HIPAA, NAIC AI Model Bulletin, state insurance AI laws, CMS) is this person expected to already know?"
+    ],
+    "fix": "Hi [Client],\n\nThis is a real senior AI governance/policy hire \u2014 the title tag doesn't match the seniority in the body. Here's the bar I'll screen against, and what I need from you first.\n\nMust have - I will not submit without these\n- Responsible AI policy authorship (standards, approvals, exceptions)\n- AI risk tiering and controls-mapping design (Tier 0-4)\n- Cross-functional facilitation across Security, Privacy, Compliance, Legal, Risk, Audit, Data Governance\n- Governance operations: intake, review boards, KPI/exception tracking\n- Audit-readiness documentation for regulators/execs\n\nStrong plus\n- Model governance artifact literacy (model cards, datasheets, drift monitoring)\n- Health-insurance regulatory knowledge (HIPAA, NAIC AI Model Bulletin, state AI rules)\n- Experience embedding governance into CI/CD, policy-as-code\n- Training design and communities-of-practice building\n\nGenuinely optional\n- Hands-on bias/fairness, explainability, robustness testing execution\n- Policy-as-code tooling experience\n\nBefore I go to market:\n1. Rate band and contract length \u2014 this person needs real standing with Legal/Audit/Risk; a short, underpriced contract won't buy that authority.\n2. Is the training/comms/communities-of-practice work meant for this same hire, or is there a separate enablement resource for it?\n3. Does \"Responsible AI Assurance\" mean writing requirements, or personally running bias/fairness/robustness testing?\n4. What level are you actually budgeting for \u2014 Director-level GRC, or the PM req the title suggests?\n\nSend me those and I'll start sourcing.\n\n[Name]"
+  },
+  "how_to_tell_in_ten_minutes": [
+    {
+      "question": "Walk me through a Responsible AI policy you drafted \u2014 who had to sign off before it became binding?",
+      "real_answer_sounds_like": "Legal and Compliance had joint sign-off; I went through two redlines with Legal counsel because my exception-handling clause conflicted with an existing model-risk policy, and I had to get the CRO's delegate to approve the final version.",
+      "bluff_sounds_like": "I wrote our AI usage guidelines and circulated them to the team for feedback."
+    },
+    {
+      "question": "Tell me about a risk tiering model you built \u2014 which stakeholder group pushed back on where something landed, and who adjudicated it?",
+      "real_answer_sounds_like": "Legal wanted a customer-facing chatbot at Tier 3, engineering wanted Tier 1; I ran a tier adjudication session and the Risk committee chair made the final call after I presented the impact/autonomy scoring.",
+      "bluff_sounds_like": "We had a scoring rubric based on impact and used it to sort projects into tiers."
+    },
+    {
+      "question": "Describe a governance decisioning forum you ran \u2014 what did Audit or Legal block until you fixed it?",
+      "real_answer_sounds_like": "Audit held up the fast-path approval until I added an evidence-retention requirement to the intake form; once that was in, they signed off on the low-risk lane.",
+      "bluff_sounds_like": "We had monthly meetings to review AI projects and discuss any issues."
+    },
+    {
+      "question": "Give me an audit or regulatory inquiry where your documentation was the thing under scrutiny \u2014 what did the auditor make you produce that you didn't already have?",
+      "real_answer_sounds_like": "An internal auditor asked for evidence of human-in-the-loop review on a Tier 2 model; I had to backfill sign-off logs and got the model owner to attest retroactively before the finding closed.",
+      "bluff_sounds_like": "We kept good records so audits went smoothly."
+    },
+    {
+      "question": "Have you worked under health-insurance-specific rules like the NAIC AI Model Bulletin or state insurance AI regs \u2014 what did your Compliance officer require you to change because of them?",
+      "real_answer_sounds_like": "Compliance flagged that our underwriting model use case needed a bias-testing artifact specifically because of the state's AI bulletin filing requirement, so I added that to the Tier 3 control set.",
+      "bluff_sounds_like": "I'm familiar with HIPAA and general AI regulation."
+    }
+  ],
+  "_meta": {
+    "model": "claude-sonnet-5",
+    "votes": 3,
+    "role_counts": [
+      2,
+      3,
+      2
+    ],
+    "verdicts": [
+      "makes_sense_with_edits",
+      "does_not_make_sense",
+      "does_not_make_sense"
+    ],
+    "unanimous_roles": false,
+    "unanimous_verdict": false,
+    "won": {
+      "roles": 2,
+      "verdict": "makes_sense_with_edits"
+    }
+  }
+}

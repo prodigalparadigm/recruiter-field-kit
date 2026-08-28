@@ -1,0 +1,28 @@
+{
+  "fixture": "enterprise_ai_training_specialist.md",
+  "defends": "Technology timeline. The bar asks for more enterprise experience than the named products have existed to provide, and the decoder must name the ceiling and the substitute.",
+  "source": "Agency outreach, Aug 2026. No client named in the original.",
+  "practitioner_read": "The years of experience are wrong - not possible. The application of the technology hasn't been happening that long. (Kathleen Bartin, Aug 2026.)",
+  "sanity_verdict_any_of": [
+    "makes_sense_with_edits",
+    "does_not_make_sense"
+  ],
+  "notes": "The two must_appear groups are the rule's two halves: name the honest ceiling AND name what to accept instead. A ceiling without a substitute leaves the recruiter with a complaint and no move.",
+  "diagnosis_must_mention_any_of": [
+    [
+      "2023",
+      "2024",
+      "ceiling",
+      "has existed",
+      "only been",
+      "how long"
+    ],
+    [
+      "substitute",
+      "instead",
+      "accept",
+      "adjacent",
+      "real pool"
+    ]
+  ]
+}

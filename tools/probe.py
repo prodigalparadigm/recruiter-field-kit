@@ -900,12 +900,13 @@ def check_schema(d, analysis_only=False):
 
 def check_expected(d, exp):
     p = []
-    lo, hi = exp["roles_bundled_count"]["min"], exp["roles_bundled_count"]["max"]
     n = len(d.get("roles_bundled", []))
-    if not lo <= n <= hi:
-        p.append(f"roles_bundled = {n}, expected {lo}-{hi}")
+    if exp.get("roles_bundled_count"):
+        lo, hi = exp["roles_bundled_count"]["min"], exp["roles_bundled_count"]["max"]
+        if not lo <= n <= hi:
+            p.append(f"roles_bundled = {n}, expected {lo}-{hi}")
     got = d.get("sanity", {}).get("verdict")
-    if got != exp["sanity_verdict"]:
+    if exp.get("sanity_verdict") and got != exp["sanity_verdict"]:
         p.append(f"verdict = {got}, expected {exp['sanity_verdict']}")
     blob = json.dumps(d).lower()
     for s in exp.get("must_appear_anywhere", []):
@@ -917,6 +918,29 @@ def check_expected(d, exp):
         alts = [s] if isinstance(s, str) else s
         if not any(a.lower() in core for a in alts):
             p.append(f"core_role names none of {alts}")
+
+    # A fixture usually exists to defend one RULE, not just a count. These assertions let
+    # it say so without becoming brittle about exact wording.
+    if exp.get("sanity_verdict_any_of") and got not in exp["sanity_verdict_any_of"]:
+        p.append(f"verdict = {got}, expected one of {exp['sanity_verdict_any_of']}")
+
+    for alts in exp.get("must_appear_any_of", []):
+        if not any(a.lower() in blob for a in alts):
+            p.append(f"nothing anywhere mentions any of {alts}")
+
+    # Scoped assertion: a rule that says "put it in problems" must be checked THERE.
+    # A document-wide search passes on incidental mentions and defends nothing.
+    diag = json.dumps([d.get("sanity", {}).get("problems", []),
+                       d.get("red_flags_for_recruiter", [])]).lower()
+    for alts in exp.get("diagnosis_must_mention_any_of", []):
+        if not any(a.lower() in diag for a in alts):
+            p.append(f"problems/red_flags mention none of {alts} -- the reasoning this "
+                     f"fixture defends is missing, even if the verdict is right")
+
+    roles_blob = json.dumps(d.get("roles_bundled", [])).lower()
+    for alts in exp.get("a_role_must_mention_any_of", []):
+        if not any(a.lower() in roles_blob for a in alts):
+            p.append(f"no role names any of {alts} -- the market this fixture defends is missing")
     return p
 
 

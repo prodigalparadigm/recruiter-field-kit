@@ -1,0 +1,31 @@
+{
+  "fixture": "healthinsurer_ai_governance_lead.md",
+  "defends": "Enablement and adoption is its own labour market. It sits in responsibility area 6 of a governance req and the decoder must not absorb it into the governance role.",
+  "source": "Agency outreach, Aug 2026. Client anonymized. Recruiter name and contact removed.",
+  "practitioner_read": "Two jobs: a compliance/strategy advisor and an enablement specialist. (Kathleen Bartin, Aug 2026.)",
+  "roles_bundled_count": {
+    "min": 2,
+    "max": 3
+  },
+  "sanity_verdict_any_of": [
+    "does_not_make_sense",
+    "makes_sense_with_edits"
+  ],
+  "a_role_must_mention_any_of": [
+    [
+      "enablement",
+      "adoption",
+      "change management",
+      "training"
+    ]
+  ],
+  "core_role_must_mention": [
+    [
+      "governance",
+      "responsible ai",
+      "policy",
+      "risk"
+    ]
+  ],
+  "notes": "Verdict is left open on purpose: two markets with a title that says which is the hire is arguable either way. The role count and the presence of the enablement market are what this fixture defends."
+}

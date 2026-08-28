@@ -1,0 +1,138 @@
+{
+  "title_as_posted": "AI Training, Learning & Development Specialist",
+  "roles_bundled": [
+    {
+      "role": "Generative AI training / instructional design & enablement specialist",
+      "evidence": [
+        "Responsible for designing, delivering, and supporting generative AI training and enablement programs for employees across the enterprise.",
+        "Proven experience designing and facilitating both live (virtual/in-person) and asynchronous learning programs.",
+        "Working knowledge of adult learning theory and its application to AI-related content."
+      ]
+    },
+    {
+      "role": "Enterprise AI platform administration / vendor support",
+      "evidence": [
+        "1-2 years of hands-on experience administering enterprise AI platforms such as OpenAI or Claude Enterprise.",
+        "Work closely with application administrators to ensure support for tools is provided to all users."
+      ]
+    }
+  ],
+  "core_role": "An L&D / instructional-design professional who builds and delivers generative-AI training and enablement content across the enterprise. A second, smaller labour market -- hands-on enterprise AI platform administration -- is stapled onto this via one required-skills bullet; the JD's own reference to a separate 'application administrators' team suggests that admin function normally lives elsewhere, which makes this bundled requirement a genuine scope-ambiguity rather than a natural extension of the training job.",
+  "skills": {
+    "must_have": [
+      {
+        "skill": "Instructional design & adult learning theory applied to AI content",
+        "why": "Named twice as the core deliverable of the role."
+      },
+      {
+        "skill": "Designing and facilitating live + asynchronous learning programs",
+        "why": "Explicit required bullet and the central activity in the overview."
+      },
+      {
+        "skill": "Hands-on familiarity with generative AI tools (ChatGPT, Claude, Gemini, Copilot)",
+        "why": "Needed to build credible, accurate training content on the actual tools in use."
+      },
+      {
+        "skill": "1-2 years hands-on experience administering enterprise AI platforms (OpenAI, Claude Enterprise)",
+        "why": "Explicit required bullet; drives the bundled second labour market."
+      },
+      {
+        "skill": "3-5 years experience in training/instructional design/adult education or related field",
+        "why": "Explicit years bar; ambiguous whether generic-domain or AI-specific (see problems)."
+      },
+      {
+        "skill": "Microsoft 365 proficiency (Teams, SharePoint, OneDrive, Outlook)",
+        "why": "Explicit tool bullet; these are the delivery and knowledge-base surfaces for the training/enablement work."
+      }
+    ],
+    "should_have": [
+      {
+        "skill": "Prior experience delivering training specifically on generative AI tools",
+        "why": "JD marks this 'preferred' rather than mandatory, but it is the closest fit to actual day-one work."
+      },
+      {
+        "skill": "Strong understanding of enterprise security and compliance practices",
+        "why": "Needed to design content and guardrails around AI tool usage, but is supporting knowledge, not the primary deliverable."
+      },
+      {
+        "skill": "Coordination with IT/application administrator teams",
+        "why": "JD explicitly calls for working closely with a separate admin function, implying a liaison/coordination skill distinct from hands-on admin work."
+      }
+    ],
+    "nice_to_have": [],
+    "decorative": []
+  },
+  "seniority_read": "Mid-level individual contributor (3-5 years L&D/instructional design experience implied), asked to also carry a junior-to-mid platform-admin skill set (1-2 years) that barely exists in the market yet. No level/title band given beyond 'Specialist'; the blended skill ask (curriculum design + adult learning theory + enterprise AI platform admin + security/compliance literacy) is more senior than the generic title suggests.",
+  "person_portrait": "They are currently a Learning & Development Specialist, Instructional Designer, or Digital Adoption/Change Management specialist at a mid-size or large enterprise, and over the last year they got pulled into being the de facto 'Copilot' or 'ChatGPT Enterprise' champion for their department -- building the onboarding deck, running the lunch-and-learn, writing the FAQ, and occasionally poking around the admin console to reset a license or check a usage report. Their last two titles read something like 'Learning & Development Specialist' and 'Training Program Manager' or 'Digital Adoption Lead.' They build courses in Articulate or Camtasia, run live sessions in Teams, host materials in SharePoint, and can talk fluently about ADDIE or Kirkpatrick levels. On the phone, their war story is about rolling out a genAI tool to a resistant department -- the training they built, the adoption numbers they tracked, and the one executive who wouldn't stop asking if the AI would replace people. They are noticeably less fluent, and often visibly uncomfortable, when asked to go deep on platform administration -- security policies, SSO configuration, API/usage governance -- because at their current employer that work sits with IT, not with them.",
+  "red_flags_for_recruiter": [
+    "No rate posted -- can't tell if the client is pricing this as a standard trainer or a rarer training+platform-admin hybrid; ask before spending candidate time.",
+    "1-2 years 'administering' Claude Enterprise exceeds or matches the product's entire enterprise lifetime (GA'd ~Sept 2024); nobody has 2 years on it, and the population with even 1 year is tiny. OpenAI Enterprise is only slightly older, so 2 years there is also close to the ceiling.",
+    "The requirement for hands-on platform admin experience sits oddly next to the JD's own statement that a separate 'application administrators' team exists -- scope of how much real admin work this role does is unclear, and that changes who you source.",
+    "The 3-5 year experience bar is written as generic L&D/instructional-design experience, but sits under an AI-specific title; per client screening behavior this is likely to be read as needing AI-specific training experience, which does not exist in that volume yet.",
+    "No level/seniority tag beyond 'Specialist' despite a blended skill ask that is more senior than a standard trainer req."
+  ],
+  "sanity": {
+    "verdict": "makes_sense_with_edits",
+    "problems": [
+      "Bundles an instructional-design/training hire with a hands-on enterprise-AI-platform-administration requirement -- two different candidate pools (trainers vs SaaS admins) -- while also stating a separate application-admin team already exists, leaving scope of the admin piece unclear.",
+      "1-2 years hands-on admin experience on Claude Enterprise / OpenAI Enterprise exceeds or matches the tools' actual enterprise availability; the honest ceiling is closer to 1 year for Claude Enterprise, and the requirement should name an accepted substitute (e.g., admin experience on any enterprise LLM/Copilot platform plus recent hands-on with the named tools).",
+      "The 3-5 year experience bar is ambiguous between generic L&D experience and AI-specific training experience; under an AI-titled role the client will likely enforce the harder reading.",
+      "No rate posted, so there is no way to confirm the posted seniority and blended skill set are being compensated consistently with the ask."
+    ],
+    "questions_to_ask_the_client": [
+      "What percentage of this role's time is platform administration (licensing, security config, user provisioning) versus curriculum design and delivery?",
+      "Since 'application administrators' already exist per the JD, what exactly will this person administer versus merely train users on?",
+      "Will you accept candidates with roughly 1 year of hands-on Claude Enterprise / OpenAI Enterprise admin experience plus longer experience on adjacent enterprise SaaS/LLM admin consoles (e.g., Microsoft Copilot, Slack GPT)?",
+      "Is the 3-5 year experience requirement generic L&D/instructional-design experience, or does it specifically require AI-related training delivery experience?",
+      "What is the rate/band for this role, and is it priced for a standard L&D specialist or for someone who also administers enterprise AI platforms?"
+    ],
+    "fix": "Ranked bar for submissions, straight from the req:\n\nMust have - I will not submit without these:\n- Instructional design / adult learning theory applied to AI content\n- Live + async program design and facilitation\n- Hands-on fluency with GenAI tools (ChatGPT, Claude, Gemini, Copilot)\n- 1-2 yrs hands-on admin on enterprise AI platforms (OpenAI/Claude Enterprise)\n- 3-5 yrs training/instructional design experience\n- MS365 proficiency (Teams, SharePoint, OneDrive, Outlook)\n\nStrong plus:\n- Prior training delivery specifically on GenAI tools\n- Enterprise security/compliance understanding\n- Coordination experience with IT/app-admin teams\n\nGenuinely optional: nothing to cut yet -- everything above is straight from your bullets.\n\nBefore I source, I need answers on scope, because it changes who I bring you:\n\n1. What % of this role is hands-on platform admin (licensing, security config, provisioning) vs. training/curriculum work? You already list a separate app-admin team -- what does this person actually administer?\n2. 1-2 years hands-on on Claude Enterprise/OpenAI Enterprise is near or past those tools' entire enterprise lifetime. Will you accept ~1 year there plus longer admin experience on adjacent platforms (Copilot, Slack GPT)?\n3. Is the 3-5 yr bar generic L&D experience, or does it need to be AI-specific? Very different pools.\n4. Any rate guidance? A blended admin+training skillset prices differently than a standard trainer req.\n\nGet me those and I'll have a slate moving fast."
+  },
+  "how_to_tell_in_ten_minutes": [
+    {
+      "question": "Tell me about the last time you had to get sign-off from an exec or business-unit head to roll out AI training to a resistant department. Who approved the final curriculum, and what did they push back on?",
+      "real_answer_sounds_like": "Names the approver (department VP, change-management lead), describes a specific objection (job-loss fear, data risk) and how the curriculum was revised to get the sign-off.",
+      "bluff_sounds_like": "Vague 'stakeholders were supportive' with no named approver, no objection, no revision -- just 'training went well.'"
+    },
+    {
+      "question": "Walk me through getting admin console access to Claude Enterprise or ChatGPT Enterprise -- whose security or IT approval did you need, and what did that review look for?",
+      "real_answer_sounds_like": "Names a security/IT gatekeeper, describes SSO or provisioning review, mentions specific settings (usage logging, data retention) that were scrutinized.",
+      "bluff_sounds_like": "'I just got added as an admin' with no reviewer named, no mention of what the security team checked."
+    },
+    {
+      "question": "When you built training content that used real company data or workflows in a GenAI tool demo, who had to approve that content before it went out to employees?",
+      "real_answer_sounds_like": "Names a legal/compliance or InfoSec reviewer, describes redaction or sanitization steps taken to pass that review.",
+      "bluff_sounds_like": "Says they just used the tool live in front of employees with no mention of any review or redaction process."
+    },
+    {
+      "question": "Describe a rollout where the app-administrators team owned the platform and you owned training. Who had to sign off on the boundary between what you touched and what they touched?",
+      "real_answer_sounds_like": "Names a specific IT/admin lead, describes an agreed RACI or ticket-routing process for license/access issues versus training questions.",
+      "bluff_sounds_like": "'We just figured it out as we went' with no named counterpart or defined boundary."
+    },
+    {
+      "question": "Tell me about a SharePoint or Teams governance decision (permissions, site structure) you needed IT's blessing on to publish training materials enterprise-wide.",
+      "real_answer_sounds_like": "Names the IT/SharePoint admin who granted site permissions, describes a specific structure (hub site, security groups) approved for the rollout.",
+      "bluff_sounds_like": "'I just uploaded the files' with no mention of permissions, governance, or an approver."
+    }
+  ],
+  "_meta": {
+    "model": "claude-sonnet-5",
+    "votes": 3,
+    "role_counts": [
+      2,
+      2,
+      2
+    ],
+    "verdicts": [
+      "makes_sense_with_edits",
+      "makes_sense_with_edits",
+      "does_not_make_sense"
+    ],
+    "unanimous_roles": true,
+    "unanimous_verdict": false,
+    "won": {
+      "roles": 2,
+      "verdict": "makes_sense_with_edits"
+    }
+  }
+}

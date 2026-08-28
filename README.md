@@ -116,6 +116,24 @@ quoted phrases, term count against free-tier truncation, no dangling operators �
 failures are fed back for correction rather than handed over broken. A string that doesn't
 parse wastes a search you can't get back.
 
+## What this is calibrated against
+
+The decode is tuned to **one practitioner's judgment** — an agency-side recruiter and AI
+adoption consultant who rated ten real job descriptions before seeing the tool's answers.
+On role counts it agrees with that reading 8 times out of 10, up from 2 out of 6 when the
+comparison started.
+
+That is worth stating plainly rather than implying general calibration it doesn't have.
+Every house rule below came out of a disagreement with that reader, which means the rules
+encode how one experienced recruiter reads a req — not a consensus, and not a survey. If
+your read differs, the rules are in `tools/probe.py` in plain English and the fixtures are
+in `tests/`; disagreeing with them is a matter of editing a paragraph and a sidecar.
+
+Role counts on genuinely bundled reqs also vary run to run. The CLI runs the analysis three
+times and takes the majority; `_meta.role_counts` records the votes and `check` prints
+`[split vote …]` when they disagreed. On the skill path there is no voting, and Claude is
+told to say when a count is a coin flip rather than report a guess as a fact.
+
 ## Fixtures
 
 Fixtures are fed **verbatim**. Expectations live in a sidecar `<fixture>.expected.json`,
@@ -124,6 +142,23 @@ never inside the fixture — a fixture that states its own answers grades its ow
 Live decodes are recorded to `tests/recorded/` and committed so CI validates the prompt's
 last known-good output without an API key. Tune on Sonnet for speed, confirm on Opus;
 both must pass before a prompt change is kept.
+
+**Each fixture defends one rule** — it exists because it is the case that taught the rule,
+and its sidecar asserts the thing that would break if the rule eroded:
+
+| Fixture | Defends |
+|---|---|
+| `finserv_ai_automation_developer` | bundling: two markets at a rate that prices one |
+| `healthinsurer_ai_governance_lead` | enablement is its own labour market |
+| `oem_enablement_program_lead` | capacity is not skill adjacency |
+| `enterprise_ai_training_specialist` | technology timeline: name the ceiling *and* the substitute |
+| `consultancy_ai_architect` | authority mismatch, as distinct from bundling |
+| `saas_platform_support_engineer` | the floor under `makes_sense` (synthetic control) |
+
+Assertions are scoped to where the rule says the reasoning belongs. A rule that says "put
+it in problems" is checked in `problems` — a document-wide search passes on incidental
+mentions and defends nothing. Every one of these was verified by deliberately eroding the
+rule and confirming the fixture fails.
 
 ## House rules that took a session to learn
 

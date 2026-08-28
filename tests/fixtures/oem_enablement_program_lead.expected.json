@@ -1,0 +1,19 @@
+{
+  "fixture": "oem_enablement_program_lead.md",
+  "defends": "Capacity is not skill adjacency. One program manager could in principle hold all three workstreams; it is still three hires at 80-100 engineers across three regions.",
+  "source": "Statement of work, Aug 2026. Client anonymized; the vendor technology is named because it is the subject matter, not the client.",
+  "practitioner_read": "Three jobs, defined by the SOW's own workstreams. (Kathleen Bartin, Aug 2026.)",
+  "roles_bundled_count": {
+    "min": 2,
+    "max": 4
+  },
+  "sanity_verdict": "does_not_make_sense",
+  "must_appear_any_of": [
+    [
+      "workstream",
+      "no rate",
+      "not stated"
+    ]
+  ],
+  "notes": "Collapsed to 1 role before the capacity test existed. min is 2 rather than 3 because the LMS strand is genuinely arguable; anything below 2 means the capacity test has stopped working."
+}

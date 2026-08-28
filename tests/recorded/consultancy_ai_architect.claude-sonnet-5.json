@@ -1,0 +1,147 @@
+{
+  "title_as_posted": "AI Architect",
+  "roles_bundled": [
+    {
+      "role": "Enterprise/Solutions Architect leading AI adoption (architecture standards, governance, POCs, CoE mentoring)",
+      "evidence": [
+        "Define enterprise AI architecture across machine learning, generative AI, automation, and emerging agent-based capabilities",
+        "Develop architectural standards, patterns, and reference architectures for AI solutions.",
+        "Lead proof-of-concepts and technical evaluations of new AI technologies and platforms",
+        "Establish and evolve AI governance processes...",
+        "Provide technical leadership and mentoring within the AI CoE and wider technology community"
+      ]
+    }
+  ],
+  "core_role": "A single labour market: a senior enterprise/solutions architect who is being asked to also own AI governance standard-setting and CoE mentoring. The POC leadership and governance-writing don't survive the DELETE test as separate markets -- an architect who runs their own POCs and writes the standards they'll enforce is one person, per the MERGE test. What does NOT survive scrutiny is not a second role, it's an authority question (see red flags): whether a 6-month contract-to-hire brought in cold can actually hold the standing this job describes.",
+  "skills": {
+    "must_have": [
+      {
+        "skill": "10+ years enterprise/solution/cloud/data/application architecture",
+        "why": "Explicit numeric bar in qualifications, the primary screening filter"
+      },
+      {
+        "skill": "Hands-on design/implementation of AI, ML, or GenAI solutions in an enterprise setting",
+        "why": "Named directly under Qualifications as 'proven experience'"
+      },
+      {
+        "skill": "RAG, semantic search, vector databases, prompt design",
+        "why": "Named as core architecture concepts and is a listed 'Primary Skill'"
+      },
+      {
+        "skill": "One major cloud platform (AWS/Azure/GCP)",
+        "why": "Explicit requirement, tied to solution delivery"
+      },
+      {
+        "skill": "Python and AI/ML tooling",
+        "why": "Explicit 'hands-on' requirement, distinguishes from a pure-PowerPoint architect"
+      },
+      {
+        "skill": "APIs, distributed systems, microservices",
+        "why": "Named as core architecture competency, load-bearing for the design-review responsibility"
+      },
+      {
+        "skill": "Data platforms / pipelines / enterprise data architecture",
+        "why": "Named explicitly, needed for RAG/GenAI grounding work"
+      },
+      {
+        "skill": "AI governance, security, risk, Responsible AI understanding",
+        "why": "Directly tied to the governance and compliance-partnering responsibilities"
+      },
+      {
+        "skill": "Stakeholder communication / workshop facilitation",
+        "why": "Explicit, and load-bearing for the CoE-mentoring and cross-team responsibilities"
+      }
+    ],
+    "should_have": [
+      {
+        "skill": "Agentic AI / AI orchestration frameworks / intelligent automation",
+        "why": "Listed as a 'Primary Skill' at the top of the posting but demoted to 'would be beneficial' in the qualifications -- inconsistent placement, treat as should-have not must-have"
+      }
+    ],
+    "nice_to_have": [
+      {
+        "skill": "Intelligent automation platforms specifically",
+        "why": "Explicitly marked 'exposure...would be beneficial'"
+      }
+    ],
+    "decorative": [
+      {
+        "skill": "Stay informed on AI developments and assess their relevance to client",
+        "why": "Vibe/disposition, not a screenable skill"
+      }
+    ]
+  },
+  "seniority_read": "Titled and rated (implicitly) as a senior individual contributor architect, but the actual scope -- setting enterprise standards, running AI governance, mentoring a CoE, advising security/compliance -- reads as principal/staff-architect or Head-of-AI-CoE level. The posted 10-year generic-architecture bar undersells what the responsibilities actually demand.",
+  "person_portrait": "Someone who has spent the last 4-5 years as a Cloud/Solutions Architect at a large enterprise (insurance, healthcare, financial services, or similar regulated shop) and the last 18-24 months specifically standing up a GenAI or RAG platform on Azure or AWS -- probably titled 'AI/ML Architect' or 'Principal Cloud Architect' at their last two stops. They've built or reviewed a retrieval pipeline, sat in an architecture review board, and have a war story about pushing back on a business team that wanted to ship a chatbot without a data-loss-prevention review. They can talk fluently about vector DB choices and prompt injection risk on the phone, and they've mentored junior engineers informally even if they've never held a CoE title. They are used to being the person in the room who says no to a director -- which is exactly the standing this contract-to-hire, unnamed-client, no-rate engagement will need to hand them on day one for the governance and mentoring lines to be real.",
+  "red_flags_for_recruiter": [
+    "Authority mismatch (Rule 5): the JD asks this hire to 'establish and evolve AI governance processes' enterprise-wide and 'mentor within the AI CoE' -- but the engagement is a 6-month contract-to-hire, client unnamed, rate unstated, sourced via cold agency outreach. That is not automatically standing to tell existing architects and business stakeholders what the new standard is; confirm the client is giving this person real executive sponsorship, not just a badge.",
+    "No rate posted at all -- cannot check whether the terms match the seniority (principal/staff-level scope) the responsibilities actually describe. Submitting blind risks a rate mismatch discovered after interviews.",
+    "'Agentic AI' is listed as a top-line Primary Skill but demoted to 'would be beneficial' inside the qualifications -- unclear whether the client will hard-screen on it or not. Ask before filtering candidates out or in on it.",
+    "10-year experience bar is written against generic 'enterprise, solution, cloud, data, or application architecture' -- but sits under an AI-titled role with GenAI/RAG/agentic AI as named primary skills. On the phone, expect the client to informally re-read this as '10 years of AI architecture,' which is not a real population: RAG has been enterprise-deployable roughly 2-3 years, agentic AI frameworks less than 2. The honest ceiling for AI-specific experience is 2-3 years; the substitute to accept is 10 years general architecture plus 2-3 years hands-on GenAI/RAG, which is what the qualifications section literally says -- but confirm the client will actually screen on that reading and not the AI-specific one.",
+    "Cold outreach with a generic recruiter self-introduction and no named client -- normal industry practice, but combined with no rate it means you cannot yet tell a candidate who they'd be working for or what they'd be paid."
+  ],
+  "sanity": {
+    "verdict": "makes_sense_with_edits",
+    "problems": [
+      "Authority the role requires (setting enterprise standards, mentoring a CoE, telling other teams what governance looks like) may exceed what a 6-month contract-to-hire, unnamed-client engagement can confer -- needs confirmation, not assumption.",
+      "No rate posted, so seniority-to-pay match cannot be verified before spending candidate time.",
+      "Years-of-experience bar is ambiguous between generic architecture experience (10 yrs, achievable) and AI-specific experience (10 yrs, not achievable given the technology's timeline) -- the JD as written supports the generous reading but the client is likely to enforce the AI-specific one at screening.",
+      "'Agentic AI' promoted to a top-line Primary Skill but only a nice-to-have in the body -- inconsistent signal about what's actually a hard filter."
+    ],
+    "questions_to_ask_the_client": [
+      "Is the 10-year bar generic architecture experience, or do you require 10 years specifically in AI/ML/GenAI architecture?",
+      "What is the pay rate/range for this role, and does it reflect principal/staff-level architecture scope?",
+      "Will this person have explicit executive sponsorship to set governance standards other teams must follow, or is this advisory-only during the contract phase?",
+      "Is 'Agentic AI' a hard requirement or a nice-to-have -- should we screen candidates out for lacking it?",
+      "Can you name the client, or is that withheld until later in process?"
+    ],
+    "fix": "Good scope, but I need four answers before I send names, because they change who I put in front of you.\n\n1) The 10-year bar \u2014 general enterprise/solution architecture (achievable), or 10 years specifically in AI/GenAI (not a real population \u2014 the tech's only been enterprise-deployable 2-3 years)? I'll screen on general architecture + 2-3 years hands-on GenAI/RAG unless told otherwise.\n2) Rate/range \u2014 can't match seniority to pay without it, and this scope reads principal/staff-level.\n3) Authority \u2014 this person is expected to set governance standards and mentor a CoE. On a 6-month contract-to-hire with an unnamed client, will they have real executive sponsorship to do that, or is it advisory only?\n4) Agentic AI is a headline Primary Skill but only 'beneficial' in the qualifications. Hard filter or not?\n\nHere's the bar I'm screening against once I have those answers:\n\nMust have - I will not submit without these\n10+ yrs architecture (general or AI); hands-on AI/ML/GenAI delivery; RAG/semantic search/vector DBs/prompt design; one major cloud platform; Python + AI/ML tooling; APIs/distributed systems/microservices; data platforms/pipelines; AI governance/security/Responsible AI; stakeholder communication.\n\nStrong plus\nAgentic AI / orchestration frameworks / intelligent automation.\n\nGenuinely optional\nNone \u2014 everything else in the JD is either must-have or a client question above, not a nice-to-have I'll quietly drop.\n\nSend me the four answers and I'll have candidates to you this week."
+  },
+  "how_to_tell_in_ten_minutes": [
+    {
+      "question": "Walk me through a RAG or grounding pipeline you shipped \u2014 who had to approve the data sources going into it?",
+      "real_answer_sounds_like": "Names a data governance or security review board, describes what got flagged (PII exposure, stale source, licensing), and how the design changed to pass.",
+      "bluff_sounds_like": "Talks fluently about chunking strategy and embedding models but goes vague the moment you ask who signed off on using that data."
+    },
+    {
+      "question": "Tell me about a governance standard or architecture pattern you wrote that other teams had to follow \u2014 who had authority to actually enforce it?",
+      "real_answer_sounds_like": "Describes an architecture review board or CoE charter, names the sponsor (CTO/CISO/VP Eng) who backed the standard, and a specific team that pushed back before complying.",
+      "bluff_sounds_like": "Says 'I set the standard for the org' with no mention of who gave them that mandate or any pushback they had to resolve."
+    },
+    {
+      "question": "Describe a GenAI or ML solution you moved from POC to production \u2014 who approved that promotion, and what did they check first?",
+      "real_answer_sounds_like": "Names a change-control or release board, describes specific gates (load testing, monitoring hooks, rollback plan) required before go-live.",
+      "bluff_sounds_like": "Says the POC 'went live' with no mention of a gate, sign-off, or anyone who could have said no."
+    },
+    {
+      "question": "Tell me about a time security or compliance pushed back on an AI solution you designed \u2014 who had to sign off before you could proceed?",
+      "real_answer_sounds_like": "Names a specific reviewer (DPO, CISO, compliance officer), the specific objection (data residency, model explainability, PII), and how the design was changed to get the sign-off.",
+      "bluff_sounds_like": "Gives a generic 'we always work closely with security' answer with no named approval, no specific objection, no resolution."
+    },
+    {
+      "question": "Have you built or evaluated an agent-based/orchestration workflow \u2014 who had to approve giving it autonomous action permissions?",
+      "real_answer_sounds_like": "Names the specific approval (security team granting scoped API/tool access, a human-in-the-loop requirement mandated by a reviewer) and what limits were imposed.",
+      "bluff_sounds_like": "Describes agent frameworks conceptually (LangGraph, AutoGen) but has never had to get anyone's permission to let one act on real systems."
+    }
+  ],
+  "_meta": {
+    "model": "claude-sonnet-5",
+    "votes": 3,
+    "role_counts": [
+      1,
+      1,
+      1
+    ],
+    "verdicts": [
+      "makes_sense_with_edits",
+      "does_not_make_sense",
+      "makes_sense_with_edits"
+    ],
+    "unanimous_roles": true,
+    "unanimous_verdict": false,
+    "won": {
+      "roles": 1,
+      "verdict": "makes_sense_with_edits"
+    }
+  }
+}

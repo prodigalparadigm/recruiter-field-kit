@@ -1,0 +1,164 @@
+{
+  "title_as_posted": "Senior Enablement Program Lead - NVIDIA AI Factory Readiness (Contract)",
+  "roles_bundled": [
+    {
+      "role": "Global technical enablement / program manager (governance, stakeholder coordination, certification tracking, KPI/executive reporting, shadowing-program operations)",
+      "evidence": [
+        "The Program Lead owns end-to-end enablement strategy across technical learning paths, instructor-led training, certification management, deployment shadowing, learning platform integration, operational reporting and executive governance.",
+        "Coordinate global technical workshops, training voucher utilization, manufacturing site enablement, deployment shadowing with NVIDIA NVIS teams, KPI reporting, executive reviews and continuous program improvement."
+      ]
+    },
+    {
+      "role": "NVIDIA AI Factory / GPU infrastructure technical SME (owns the actual technical content the program is measured on -- infrastructure deployment, cluster methodology, NVAIE architecture, L1/L2 troubleshooting depth -- while being explicitly barred from delivering or authoring it)",
+      "evidence": [
+        "GPU compute infrastructure deployment \u2022 NVIDIA networking deployment \u2022 AI infrastructure validation and performance optimization \u2022 Cluster deployment methodologies \u2022 Production readiness validation",
+        "Level 2 Support \u2022 Advanced troubleshooting \u2022 Software configuration \u2022 Deployment optimization \u2022 Root cause analysis",
+        "Out of scope: authoring NVIDIA curriculum, acting as instructor, software development, customer consulting delivery and commercial negotiations."
+      ]
+    },
+    {
+      "role": "Learning platform / LMS integration & instructional-design coordination (hidden market per rule 2 -- softened but not eliminated by the curriculum-authoring exclusion)",
+      "evidence": [
+        "Partner with the manufacturer Learning & Development to integrate NVIDIA learning paths into the manufacturer learning platforms, standardize learning journeys, maintain curriculum alignment, improve learner reporting and establish scalable enablement processes."
+      ]
+    }
+  ],
+  "core_role": "As written, a single 'Senior Enablement Program Lead' who is asked to both run a global enablement/certification program AND personally own deep NVIDIA AI Factory infrastructure/software technical content well enough to define competency and readiness -- two labour markets pushed into one requisition, with a third (LMS/instructional coordination) riding along as a workstream. No single candidate pool cleanly covers all three; the MERGE test fails between program governance and hands-on GPU/NVAIE technical depth.",
+  "skills": {
+    "must_have": [
+      {
+        "skill": "Technical enablement/certification program management at scale",
+        "why": "\"owns end-to-end enablement strategy across technical learning paths, instructor-led training, certification management, deployment shadowing...\" is the spine of the SOW"
+      },
+      {
+        "skill": "Working knowledge of NVIDIA AI Enterprise / AI Factory technical stack (GPU compute, networking, cluster deployment, validation) sufficient to design competency frameworks",
+        "why": "Workstream 1 requires the lead to 'own and operationalize' this content, not merely schedule it"
+      },
+      {
+        "skill": "Cross-org stakeholder management (NVIDIA, Delivery, Sales, L&D, Manufacturing, Product)",
+        "why": "explicitly named as the operating environment, and the workstreams cannot run without it"
+      },
+      {
+        "skill": "Executive KPI reporting / governance cadence",
+        "why": "\"Executive KPI reporting established\" is a named success measure"
+      },
+      {
+        "skill": "Global program operations at scale (workshops, vouchers, shadowing, multi-region execution)",
+        "why": "\"Global workshops executed across regions\" and 80-100 engineer target are explicit deliverables"
+      }
+    ],
+    "should_have": [
+      {
+        "skill": "Learning platform / LMS integration experience",
+        "why": "Workstream 2 requires integrating NVIDIA learning paths into the manufacturer's platforms and standardizing journeys"
+      },
+      {
+        "skill": "L1/L2 technical support process design (triage, escalation, RCA)",
+        "why": "named explicitly as content the readiness program must operationalize"
+      },
+      {
+        "skill": "Certification/skills-tracking systems experience",
+        "why": "\"skills tracking and executive reporting\" is a recurring deliverable"
+      }
+    ],
+    "nice_to_have": [
+      {
+        "skill": "Direct NVIDIA partner ecosystem / NVIS experience",
+        "why": "shadowing is done 'with NVIDIA NVIS teams' -- prior exposure shortens ramp"
+      },
+      {
+        "skill": "Manufacturing-site enablement experience",
+        "why": "one named persona group is 'Manufacturing Technical Teams'"
+      },
+      {
+        "skill": "Familiarity with the client's internal LMS ('the manufacturer Grow')",
+        "why": "named as a specific learning modality"
+      }
+    ],
+    "decorative": [
+      {
+        "skill": "\"continuous program improvement\"",
+        "why": "aspirational phrase with no attached metric"
+      },
+      {
+        "skill": "\"scalable global enablement framework\"",
+        "why": "descriptor, not a checkable skill or deliverable"
+      }
+    ]
+  },
+  "seniority_read": "Titled and scoped as senior/staff-level (executive governance, cross-org convening, 80-100 person program) -- but arriving as a rate-less, duration-less SOW with no stated reporting line, which is inconsistent with the standing the work actually requires.",
+  "person_portrait": "They currently sit inside a systems-integrator, hyperscaler channel org, or NVIDIA partner enablement team, with a title like 'Global Technical Enablement Manager' or 'Partner Readiness Program Manager,' one step removed from actually configuring GPU clusters but close enough to have done it earlier in their career (prior title: Solutions Architect or Infrastructure Delivery Engineer). Their war story is standing up a certification/readiness funnel for a new hardware or cloud platform across multiple regions -- wrangling vendor training calendars, chasing voucher redemption rates, and presenting a completion dashboard to a steering committee that included people three levels above them. On the phone they talk fluently about KPI cadences, shadowing-phase gates, and stakeholder alignment, but when pressed on 'own GPU compute infrastructure deployment' they clarify that they coordinate the people who do that, not the deployment itself -- which is exactly the seam this JD papers over.",
+  "red_flags_for_recruiter": [
+    "No rate, no duration, no reporting line -- arrived as an SOW, not a priced req; you cannot tell what level of person the client will actually pay for.",
+    "Bundles a program-governance market with a hands-on NVIDIA AI Enterprise/GPU-infrastructure technical-depth market inside one title; the Contract Boundaries explicitly forbid the person from instructing or authoring curriculum, yet Workstream 1 requires them to 'own and operationalize' deep infrastructure and L1/L2 troubleshooting content -- an unusual, narrow combination to screen for.",
+    "Capacity: three full workstreams (technical readiness for 80-100 engineers, LMS integration, global operations across regions) with no stated team or headcount under this person -- unclear if this is an IC role or a lead-of-a-team role, which changes who you'd submit.",
+    "Authority mismatch: role requires convening NVIDIA, Sales, Manufacturing, Product and L&D and running executive reviews, but the engagement terms (rate/duration/reporting line) that would confer that standing are all unstated.",
+    "NVIDIA AI Enterprise / 'AI Factory' branding is only ~2-3 years old in enterprise deployment; genuine deep experience across all six listed disciplines (Design/Configure/Build/Deploy/Operate/Manage) for this specific stack is inherently rare -- the honest ceiling is a couple of years of AI-Factory-specific exposure; broader NVIDIA/GPU/HPC infrastructure and partner-enablement experience is the real substitute to screen for.",
+    "Learning Platform Integration workstream is a hidden instructional-design/LMS market riding inside the program-lead title; softened by the curriculum-authoring exclusion but still a distinct skillset from program governance."
+  ],
+  "sanity": {
+    "verdict": "does_not_make_sense",
+    "problems": [
+      "Two-plus labour markets bundled (program governance vs. deep NVIDIA AI Factory technical ownership, plus LMS/instructional coordination) with no rate posted at all -- there is no way to tell which market this requisition is actually pricing.",
+      "No duration or reporting line given, so the authority the role needs (convening NVIDIA, Sales, Manufacturing, Product, L&D, running executive reviews) cannot be verified as something the engagement actually confers.",
+      "Scope (80-100 engineers, three full workstreams, global regions, exec KPI reporting) is described with no team or staffing under the role, so it is unclear whether this is a single-IC contract or a program-lead-of-a-team -- a distinction that changes who you source entirely.",
+      "The role is required to 'own and operationalize' deep technical infrastructure/software content (GPU deployment, NVAIE architecture, L2 RCA) while being contractually barred from instructing or authoring curriculum -- a fine and unusual seam that most candidates in either adjacent market (technical SME or program manager) will not cleanly satisfy."
+    ],
+    "questions_to_ask_the_client": [
+      "What is the rate and duration for this engagement, and is it staff-level or true 1099/contract?",
+      "Who does this person report to, and does that sponsor have the standing to convene NVIDIA, Sales, Manufacturing and Product stakeholders on this person's behalf?",
+      "Does this person get a team (instructional designers, technical SMEs, regional coordinators) to execute the three workstreams, or is this a single-person build-and-run role?",
+      "For Workstream 1: does the Program Lead need personal hands-on NVIDIA AI Enterprise/GPU infrastructure expertise to design competency frameworks, or can they rely on NVIDIA/internal SMEs for technical content while managing process and reporting?",
+      "For Workstream 2: is LMS/learning-platform integration hands-on technical work the Program Lead performs, or coordination of an existing L&D team who performs it?",
+      "How many regions and sites make up the '80-100 global delivery engineers' population, and over what calendar window is that target expected?"
+    ],
+    "fix": "Subject: NVIDIA AI Factory Enablement Lead \u2014 need answers before I submit anyone\n\nThis one bundles two different people into one title, so here's the bar, plus what I need from you before I go to market.\n\nMust have - I will not submit without these\n- Technical enablement/certification program management at scale (has run something like an 80-100 person readiness funnel)\n- Working knowledge of NVIDIA AI Enterprise/AI Factory stack (GPU compute, networking, cluster deployment) deep enough to build competency frameworks\n- Cross-org stakeholder management across vendor, sales, delivery, manufacturing\n- Executive KPI reporting/governance cadence\n- Global program operations at scale (workshops, vouchers, shadowing, multi-region)\n\nStrong plus\n- LMS/learning-platform integration experience\n- L1/L2 support process design (triage, escalation, RCA)\n- Certification/skills-tracking systems\n\nGenuinely optional\n- NVIDIA partner/NVIS exposure\n- Manufacturing-site enablement experience\n- Familiarity with the client's internal LMS specifically\n\nBefore I send anyone: this arrived as an SOW with no rate, no duration, and no reporting line, so I can't tell what level of person you're actually paying for. I need:\n1) Rate and duration\n2) Who this person reports to, and whether that sponsor can actually get them in the room with NVIDIA, Sales, and Manufacturing\n3) Whether they get a team to run the three workstreams, or they're solo\n4) Whether the technical ownership in Workstream 1 is hands-on-design or coordinate-the-SMEs\n\nOnce I have those, I'll know which market you're really hiring into."
+  },
+  "how_to_tell_in_ten_minutes": [
+    {
+      "question": "On a readiness program you ran, who had to sign off on the certification/competency bar before it went live to engineers \u2014 a vendor certification authority, an internal training governance board, a customer exec?",
+      "real_answer_sounds_like": "\"Our NVIDIA partner enablement lead had to approve the readiness criteria and the exam gating before we opened voucher redemption \u2014 took two review cycles.\"",
+      "bluff_sounds_like": "\"We just aligned with stakeholders and rolled it out\" \u2014 no named approver, no named gate."
+    },
+    {
+      "question": "When you say you owned GPU cluster deployment/validation, who signed off on the production-readiness checklist before it went into a customer or internal environment \u2014 platform engineering lead, change board, security review?",
+      "real_answer_sounds_like": "\"Infra lead had to approve the checklist, and networking sign-off was separate because of the fabric config.\"",
+      "bluff_sounds_like": "\"We followed NVIDIA best practice docs\" \u2014 no named human approver, no named artifact."
+    },
+    {
+      "question": "Who had final approval on the KPI/dashboard definitions before they went in front of the steering committee \u2014 the program sponsor, finance, the client exec?",
+      "real_answer_sounds_like": "\"Sponsor rejected our first draft because completion % didn't match voucher spend \u2014 we had to rebuild the definitions and get her sign-off before the exec review.\"",
+      "bluff_sounds_like": "\"We just presented what we had\" \u2014 no approval step, no pushback story."
+    },
+    {
+      "question": "When you integrated a vendor's learning paths into an internal LMS, who had to approve the reporting/data schema change \u2014 LMS platform owner, IT, compliance?",
+      "real_answer_sounds_like": "\"Platform owner had to approve the taxonomy mapping before we could push completions into the client's reporting layer.\"",
+      "bluff_sounds_like": "\"We just uploaded the content\" \u2014 no named platform owner, no approval gate."
+    },
+    {
+      "question": "Who gave you the standing to convene NVIDIA, Sales, Manufacturing and Product for executive reviews \u2014 did a sponsor formally charter that, or did you self-organize it?",
+      "real_answer_sounds_like": "\"My sponsor sent the charter memo naming me as convener; Sales VP had to sign off before I could pull his team into the cadence.\"",
+      "bluff_sounds_like": "\"I just reached out and people showed up\" \u2014 no named sponsor, no approval trail."
+    }
+  ],
+  "_meta": {
+    "model": "claude-sonnet-5",
+    "votes": 3,
+    "role_counts": [
+      1,
+      3,
+      3
+    ],
+    "verdicts": [
+      "makes_sense_with_edits",
+      "does_not_make_sense",
+      "does_not_make_sense"
+    ],
+    "unanimous_roles": false,
+    "unanimous_verdict": false,
+    "won": {
+      "roles": 3,
+      "verdict": "does_not_make_sense"
+    }
+  }
+}

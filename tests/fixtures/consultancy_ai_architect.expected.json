@@ -1,0 +1,26 @@
+{
+  "fixture": "consultancy_ai_architect.md",
+  "defends": "Authority mismatch as a defect distinct from bundling. The role is coherent; the engagement cannot confer the standing it needs.",
+  "source": "Cold agency outreach, Aug 2026. No client named in the original.",
+  "practitioner_read": "A strategist job, really a senior position - hard to do as a lowly paid consultant, there would be no real trust. (Kathleen Bartin, Aug 2026.)",
+  "roles_bundled_count": {
+    "min": 1,
+    "max": 2
+  },
+  "notes": "Split into 2 roles before the merge test existed, and reached the right verdict for the wrong reason - it called the authority problem bundling. This fixture exists to keep the reason correct, so the verdict is left open and the reasoning is asserted instead.",
+  "diagnosis_must_mention_any_of": [
+    [
+      "authority",
+      "standing",
+      "trust",
+      "mandate"
+    ],
+    [
+      "contract-to-hire",
+      "contract to hire",
+      "no rate",
+      "not stated",
+      "unstated"
+    ]
+  ]
+}

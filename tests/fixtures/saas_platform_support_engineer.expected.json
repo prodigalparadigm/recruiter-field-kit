@@ -1,0 +1,12 @@
+{
+  "fixture": "saas_platform_support_engineer.md",
+  "defends": "The floor under makes_sense. This JD has an admitted backlog, a broad surface and optimistic nice-to-haves, and none of that is grounds to demote it. If this stops returning makes_sense, the floor rule has eroded and every JD will land in with_edits again.",
+  "source": "Wholly synthetic. Written for this repo as a control; not a real posting.",
+  "practitioner_read": "n/a - synthetic control.",
+  "roles_bundled_count": {
+    "min": 1,
+    "max": 1
+  },
+  "sanity_verdict": "makes_sense",
+  "notes": "Deliberately imperfect: 'the backlog is real and growing', a stack in nice-to-have that isn't required, and a wide surface (API, SDKs, CLI, docs, on-call). One market, one bar, rate consistent with the seniority."
+}
