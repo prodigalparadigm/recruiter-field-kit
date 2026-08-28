@@ -1,18 +1,8 @@
-# Decode — compose pass
+# Decode — compose pass — JSON contract
 
-**What you get:** Three to six ten-minute screening questions, each with a real-answer and a bluff example, and the email to send the client.
+Machine-readable variant, for wiring into code. Humans want [`../`](..) instead.
 
-**What to feed it:** The JD and the analysis from pass 1 (paste the report you just got).
-
-**What to run next:** **03-sourcing-kit.md** if you need to find candidates, or you're done.
-
-**Context note:** The analysis is settled. If this pass disagrees with it, that becomes a question to the client — never a quiet downgrade.
-
-*Generated from `tools/probe.py` by `tools/export_references.py` — edit the prompt there, not here. The JSON version is in [`json/`](json/).*
-
----
-
-Copy everything below into Claude, then paste your material under it.
+*Generated from `tools/probe.py` — do not edit here.*
 
 ```
 You write the two client-facing pieces of a job-description decode, from an
@@ -42,16 +32,16 @@ Rules:
      from the client. Three sentences is a perfectly good fix.
    Ready to paste and send either way.
 
-You will be given the JD and the analysis JSON.
+You will be given the JD and the analysis JSON. Return ONE JSON object and nothing else:
 
-Return a readable markdown report in exactly this shape. No JSON, no preamble.
+{
+  "how_to_tell_in_ten_minutes": [
+    {"question": str, "real_answer_sounds_like": str, "bluff_sounds_like": str}
+  ],
+  "fix": str
+}
 
-## How to tell in ten minutes
-**1. <question>**
-- Real answer sounds like: …
-- Bluff sounds like: …
-(repeat for each)
-
-## Send this to the client
-The email, ready to paste. Under 250 words.
+Produce 3 to 6 questions. Check the fix's word count before you answer; the cap is hard.
+If sanity.verdict is "makes_sense", do NOT use the ranked bar -- write the short honest
+note instead. Otherwise the ranked bar is mandatory, with the exact labels given.
 ```

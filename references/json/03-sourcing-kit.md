@@ -1,18 +1,8 @@
-# Sourcing kit
+# Sourcing kit — JSON contract
 
-**What you get:** One Boolean search per labour market — tight, wide, and an exclusion clause — plus x-ray strings, the same title at three company sizes, and where these people are besides a profile search.
+Machine-readable variant, for wiring into code. Humans want [`../`](..) instead.
 
-**What to feed it:** The JD and the decode.
-
-**What to run next:** Nothing — run the searches yourself. Every string here is for you to type.
-
-**Context note:** Check each string before you run it: balanced parentheses, AND/OR/NOT in capitals, multi-word phrases in quotes. A string that doesn't parse wastes a search you can't get back.
-
-*Generated from `tools/probe.py` by `tools/export_references.py` — edit the prompt there, not here. The JSON version is in [`json/`](json/).*
-
----
-
-Copy everything below into Claude, then paste your material under it.
+*Generated from `tools/probe.py` — do not edit here.*
 
 ```
 You build the search strategy a recruiter runs BY HAND, from a decode
@@ -61,20 +51,23 @@ Rules:
    goes there as a person, not as a search. Be specific -- name the kind of place, not
    "relevant online communities".
 
-Return a readable markdown report in exactly this shape. No JSON, no preamble.
+Return ONE JSON object and nothing else:
 
-## Fill first
-Which market to search first, and why.
-
-## <Market name> <(core)>
-- **Tight:** <string>
-- **Wide:** <string>
-- **Exclude:** NOT (…)  — and why these exclusions, in one line
-- **X-ray:** site:linkedin.com/in …
-- **Same person is called:** at an enterprise / at a mid-size / at a startup
-- **Where else they are:** the communities, with why
-
-(repeat per market)
-
-## Warnings
+{
+  "per_market": [
+    {
+      "role": str,
+      "is_core": bool,
+      "tight": str,
+      "wide": str,
+      "exclude": str,
+      "why_exclusions": str,
+      "xray": str,
+      "titles": {"enterprise": [str], "midsize": [str], "startup": [str]},
+      "where_else": [{"place": str, "why": str}]
+    }
+  ],
+  "fill_first": str,
+  "warnings": [str]
+}
 ```

@@ -1,18 +1,8 @@
-# Should I apply — mirror mode
+# Should I apply — mirror mode — JSON contract
 
-**What you get:** Whether this is one job or several, which of them you actually are, the honest sentence to say about the gap, what to ask before applying, and a verdict.
+Machine-readable variant, for wiring into code. Humans want [`../`](..) instead.
 
-**What to feed it:** The JD, the decode, and your own summary in your own words.
-
-**What to run next:** Nothing. Decide.
-
-**Context note:** This is the one pass where your Claude's memory of your background **helps** — it can only tell you which role you are if it knows what you've done. Let it recall.
-
-*Generated from `tools/probe.py` by `tools/export_references.py` — edit the prompt there, not here. The JSON version is in [`json/`](json/).*
-
----
-
-Copy everything below into Claude, then paste your material under it.
+*Generated from `tools/probe.py` — do not edit here.*
 
 ```
 You are addressing the CANDIDATE, not the recruiter. They have a decode of a
@@ -58,14 +48,17 @@ gets sent to a client under a recruiter's name. Record which case applied in
 otherwise. If "not_stated", every reference to the person in every field must be
 they/them.
 
-Return a readable markdown report in exactly this shape. No JSON, no preamble.
+Return ONE JSON object and nothing else:
 
-## This is <one job / three jobs>
-## Which of them you are
-## Evidence you fit  /  Evidence you don't
-## The honest sentence
-> The sentence, in your own voice, ready to say out loud.
-
-## Ask before you apply
-## Verdict — and why
+{
+  "one_job_or_more": str,
+  "which_role_you_are": str,
+  "evidence_you_fit": [str],
+  "evidence_you_dont": [str],
+  "the_honest_sentence": str,
+  "what_to_ask_before_applying": [str],
+  "verdict": "apply | apply_with_eyes_open | not_this_one",
+  "why": str,
+  "pronouns_source": "stated | not_stated"
+}
 ```

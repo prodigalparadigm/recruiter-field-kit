@@ -16,51 +16,48 @@ explain that the kit gives them the string to run themselves.
 
 Profiles and résumés are **pasted by the person using the kit**. Never fetched.
 
-## What to run when
+## How to run this skill
 
-| They say | Run | You need |
+**Read the reference file for the pass you need, and follow it exactly as written.** The
+house rules further down are orientation for choosing a pass — they are a summary, not the
+pass. The real rules live in the reference files and they are much longer than what is in
+this document. Never work a pass from memory or from the summary below.
+
+| They say | Read and follow | You need |
 |---|---|---|
-| "decode this JD", "does this make sense", "is this one job or three" | **decode** | the JD |
-| "who am I looking for", "build me a search", "where do I find this person" | **sourcing kit** | a decode |
-| "should I apply", "is this worth my evening" | **should I apply** | a decode + their own summary |
-| "score this profile", "is this person a fit" | **fit score** | a decode + a pasted profile |
-| "what has this person actually built" | **receipts** | a GitHub username *they published themselves* |
+| "decode this JD", "does this make sense", "is this one job or three" | `references/01-decode-analysis.md`, then `references/02-decode-compose.md` | the JD |
+| "who am I looking for", "build me a search", "where do I find this person" | `references/03-sourcing-kit.md` | the JD + a decode |
+| "should I apply", "is this worth my evening" | `references/04-should-i-apply.md` | a decode + their own summary |
+| "score this profile", "is this person a fit" | `references/05-fit-score.md` | a decode + a pasted profile |
+| "what has this person actually built" | `references/06-receipts.md` | a GitHub username *they published themselves* |
 
-Always decode first. Everything else consumes it.
+Always decode first — everything else consumes a decode. A decode is two passes: run 01,
+then feed its output to 02. Do not stop after 01 and present it as a finished decode.
 
-## The verdicts
+`references/json/` holds the same passes with a JSON output contract, for wiring into code.
+For a person, use the markdown versions.
 
-| Verdict | Means |
-|---|---|
-| `does_not_make_sense` | As written, no one person can be hired at the posted terms |
-| `makes_sense_with_edits` | One labour market, but a defect that changes who you source or whether you can fill it |
-| `makes_sense` | One market, one bar, consistent with the rate. Imperfections go in `problems` and the verdict stands |
+## Say when you are guessing
 
-The JD is graded **as received**. Writing a good fix never improves the verdict.
+The CLI runs the analysis three times and takes the majority, because borderline role
+counts are genuinely unstable — the same JD came back 1, 2 and 3 roles across runs of an
+identical prompt. **You cannot reproduce that by sampling yourself three times in one
+context; that is correlated, not independent, and it would be theatre.**
 
-## Running it
+Do this instead: when a role count is borderline — when you seriously considered a
+different answer, or the merge and delete tests disagreed — say so in the output. "This
+reads as two markets, but the enablement strand is arguable as a third" is worth more to a
+recruiter than a confident number. The votes were never the point; knowing when it is a
+coin flip was.
 
-With an API key, the CLI does all of it:
+## Context hygiene
 
-```bash
-export ANTHROPIC_API_KEY=...
-python3 tools/probe.py decode  jd.md                       > decode.json
-python3 tools/probe.py source  decode.json jd.md           > search.json
-python3 tools/probe.py apply   decode.json jd.md me.md     > apply.json
-python3 tools/probe.py fit     decode.json jd.md person.md > fit.json
-python3 tools/probe.py receipts <github-username>          > receipts.json
-python3 tools/probe.py check   decode.json                 # validate
-python3 tools/probe.py render  decode.json                 # readable report
-```
-
-Without a key, work inline: the prompts are in [`references/`](references/), one file per
-pass, exported from the same source the CLI uses. Paste the JD under the relevant prompt
-and follow it.
-
-**The decode runs its analysis three times and takes the majority**, because borderline
-role counts are genuinely unstable — the same JD can come back 1, 2 or 3 roles across
-runs. `_meta.role_counts` records the votes. When they split, say so out loud rather than
-reporting a guess as a fact.
+- **Decode and fit score must see only what they are given** — the JD, the decode, the
+  pasted profile. If memory surfaces the user's own background during a decode or a fit
+  score, ignore it. A decode contaminated by the reader's history describes the reader.
+- **Should I apply is the exception**: there, recalling the user's own background is the
+  whole point.
+- **Never fetch a profile or résumé.** The person pastes it, or you do not have it.
 
 ## Worked example — a bundled contract req
 
@@ -108,8 +105,13 @@ Six hours saved, and the recruiter trusts them more for it.
   resolve it in the JD's favour. Grade it the way a client will actually enforce it.
 - **Technology timeline.** AI-era JDs routinely ask for more years than the technology
   has existed. Name the honest ceiling *and* the substitute.
-- **The portrait uses they/them.** It describes the typical holder of a role, never a
-  specific person, and never assigns gender, age, or origin.
+- **Pronouns are never inferred.** Use the pronouns a person's own document states;
+  where none are stated, use they/them. This holds in every pass that describes a
+  person, and it matters most in the sentence a recruiter forwards to a client. The
+  decode's portrait is always they/them — it describes the typical holder of a role,
+  not a person, and never assigns gender, age, or origin.
+- **Never describe a repo nobody fetched.** If receipts was capped, the missing repos
+  are named as unexamined and nothing is said about their contents.
 - **Never invent comp.** No band posted means "ask before spending candidate time."
 - **Absence of public code is not evidence of absence.** Most professional work is
   private. `receipts` prints this on every run.

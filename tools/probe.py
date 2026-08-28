@@ -178,7 +178,10 @@ questions and the client email are written in a separate pass, so do not produce
 
 COMPOSE_RULES = """You write the two client-facing pieces of a job-description decode, from an
 analysis another pass has already done. The analysis is settled: do not re-argue the
-verdict, do not add roles, do not soften anything. Your job is to turn it into the two
+verdict, do not add roles, do not soften anything. You may NOT re-rank the skills: anything
+the analysis placed in must_have or should_have keeps at least that weight in your ranked
+bar. If you think the analysis over-weighted something, that becomes a question to the
+client, never a quiet downgrade to "genuinely optional". Your job is to turn it into the two
 things a recruiter actually uses on the phone and in the inbox.
 
 Rules:
@@ -229,7 +232,10 @@ Rules:
    stop taking calls. If the decode names three markets, you produce three searches and
    you say which one the client should fill first.
 
-2. EXCLUSIONS ARE THE POINT, and they come from the OTHER markets in the same JD. If the
+2. EXCLUSIONS ARE THE POINT, and they come from the OTHER markets in the same JD.
+   FORMAT: "exclude" is a standalone clause the recruiter appends to a search, and it
+   always begins with NOT -- e.g. NOT ("machine learning engineer" OR "data scientist").
+   Never return bare terms; the recruiter should not have to guess whether to add NOT. If the
    core role is an integrator and the JD also bundles ML-in-production and fraud
    analytics, the integrator search must NOT surface people whose profile centre of
    gravity is model training or fraud detection. Say in one line why each exclusion is
@@ -357,6 +363,15 @@ def check_search(sr):
     return p
 
 
+
+PRONOUN_RULE = """PRONOUNS. Use the pronouns the person's own document states. Where none are
+stated, use they/them. NEVER infer pronouns from a name, a photo, a job title, or anything
+else -- inferring is the failure this rule exists to prevent, and it lands in text that
+gets sent to a client under a recruiter's name. Record which case applied in
+"pronouns_source": "stated" if the person's own document gives them, "not_stated"
+otherwise. If "not_stated", every reference to the person in every field must be
+they/them."""
+
 MIRROR_RULES = """You are addressing the CANDIDATE, not the recruiter. They have a decode of a
 job description in front of them and they are deciding whether to spend an evening on this
 application. Your job is to save them the evening if it deserves saving.
@@ -392,6 +407,8 @@ Rules:
 6. What to ask BEFORE applying: the two or three questions that would change the answer.
    Aim them at the recruiter, and make them answerable in an email.
 
+7. """ + PRONOUN_RULE + """
+
 Return ONE JSON object and nothing else:
 
 {
@@ -402,7 +419,8 @@ Return ONE JSON object and nothing else:
   "the_honest_sentence": str,
   "what_to_ask_before_applying": [str],
   "verdict": "apply | apply_with_eyes_open | not_this_one",
-  "why": str
+  "why": str,
+  "pronouns_source": "stated | not_stated"
 }"""
 
 
@@ -442,6 +460,9 @@ Rules:
 7. The questions must be for THIS person -- aimed at the specific gap or over-claim you
    found, not the generic screen from the decode.
 
+8. """ + PRONOUN_RULE + """
+   This matters most in sentence_for_the_client, which a recruiter sends onward verbatim.
+
 Return ONE JSON object and nothing else:
 
 {
@@ -453,7 +474,8 @@ Return ONE JSON object and nothing else:
   "questions_for_this_person": [{"question": str, "why_this_person": str}],
   "honesty_note": str,
   "verdict": "strong | worth_a_call | not_this_one",
-  "sentence_for_the_client": str
+  "sentence_for_the_client": str,
+  "pronouns_source": "stated | not_stated"
 }"""
 
 
@@ -497,13 +519,22 @@ Rules:
    originals only, unless a fork has substantial original commits -- which you cannot tell
    from these facts, so say that too.
 
+3a. YOU MAY ONLY DESCRIBE REPOS PRESENT IN THE FACTS. The facts name which repos were
+   examined and which were not. If a repo is in repos_not_examined you have NO facts about
+   it whatsoever -- not its commits, not its files, not whether it is empty, not whether it
+   works. List it by name as not examined, say why (the fetch was capped or failed), and
+   STOP. Never fill the gap between the originals count and the number of detailed entries
+   by inferring what the missing ones contain. Describing an unexamined repo as a
+   placeholder, as empty, or as anything else is a fabrication about a real person's work.
+
 4. Tests and CI presence is a signal about habits, not talent. Report it flatly.
 
 5. Recency: a repo untouched for two years is a finished thing or an abandoned thing.
    Say which the evidence supports, or say you cannot tell.
 
 6. NEVER infer seniority, employability, or worth from a GitHub profile. You are
-   describing artifacts, not scoring a person.
+   describing artifacts, not scoring a person. Refer to the account owner as "the author"
+   or they/them; never infer pronouns from a username.
 
 Return ONE JSON object and nothing else:
 
@@ -538,7 +569,7 @@ def _gh(path, token=None, raw=False):
         return None, ("error", str(e))
 
 
-def receipts_fetch(user, token=None, top_n=5):
+def receipts_fetch(user, token=None, top_n=10):
     """Public API only, and only for a username the candidate put on their own profile."""
     repos, err = _gh(f"/users/{user}/repos?per_page=100&sort=updated", token)
     if err:
@@ -561,6 +592,14 @@ def receipts_fetch(user, token=None, top_n=5):
 
     ranked = sorted(originals, key=lambda r: (r.get("stargazers_count", 0),
                                               r.get("pushed_at") or ""), reverse=True)[:top_n]
+    skipped = [r["name"] for r in originals if r not in ranked]
+    # No silent caps: the model must be told what it was not shown, or it fills the gap.
+    facts["repos_examined"] = [r["name"] for r in ranked]
+    facts["repos_not_examined"] = skipped
+    if skipped:
+        facts["cap_note"] = (f"{len(originals)} original repos exist; only the top {top_n} were "
+                             f"fetched. No facts were gathered about: {', '.join(skipped)}. "
+                             f"Do not describe them.")
     for r in ranked:
         name = r["name"]
         readme, rerr = _gh(f"/repos/{user}/{name}/readme", token, raw=True)
@@ -585,7 +624,7 @@ def receipts_fetch(user, token=None, top_n=5):
     return facts
 
 
-def receipts(user, model, token=None, top_n=5):
+def receipts(user, model, token=None, top_n=10):
     facts = receipts_fetch(user, token, top_n)
     if facts.get("error"):
         return facts
@@ -603,6 +642,53 @@ SIA_VERDICTS = {"apply", "apply_with_eyes_open", "not_this_one"}
 FIT_VERDICTS = {"strong", "worth_a_call", "not_this_one"}
 
 
+
+def check_pronouns(d, fields, label):
+    """Rule: pronouns come from the person's own document, or they/them. Never inferred.
+    The pass must declare which case applied, and 'not_stated' means they/them only."""
+    p = []
+    src = d.get("pronouns_source")
+    if src not in ("stated", "not_stated"):
+        return [f"{label}: pronouns_source must be 'stated' or 'not_stated'"]
+    if src == "stated":
+        return p  # the document gave them; using them is correct
+    for f in fields:
+        hits = sorted({h.lower() for h in GENDERED.findall(json.dumps(d.get(f, "")))})
+        if hits:
+            p.append(f"{label}.{f}: pronouns_source is 'not_stated' but text uses {hits} "
+                     f"-- inferred pronouns, use they/them")
+    return p
+
+
+def check_receipts(out, facts=None):
+    """The pass whose whole job is stating facts had no validator. This is mostly one
+    check: it may not describe a repo nobody fetched."""
+    p = []
+    if out.get("error"):
+        return [] if out.get("caveat") else ["error path dropped the caveat"]
+    if not out.get("caveat"):
+        p.append("caveat missing -- it prints on every run, including errors")
+    for f in ("summary", "habits", "what_this_does_not_tell_you"):
+        if not out.get(f):
+            p.append(f"{f} missing")
+    facts = facts or out.get("facts") or {}
+    examined = set(facts.get("repos_examined") or [r["name"] for r in facts.get("repos", [])])
+    skipped = set(facts.get("repos_not_examined") or [])
+    for r in out.get("notable_repos") or []:
+        n = r.get("name")
+        if n in skipped:
+            p.append(f"notable_repos names {n!r}, which was NEVER FETCHED -- rule 3a. "
+                     f"Anything said about it is invented.")
+        elif examined and n not in examined:
+            p.append(f"notable_repos names {n!r}, absent from the facts entirely")
+    blob = json.dumps(out).lower()
+    for word in ("senior", "junior", "employable", "hire this", "qualified for"):
+        if word in blob:
+            p.append(f"output uses {word!r} -- rule 6 forbids inferring seniority or "
+                     f"employability from a profile")
+            break
+    return p
+
 def check_mirror(d):
     p = []
     for f in ("one_job_or_more", "which_role_you_are", "the_honest_sentence", "why"):
@@ -619,6 +705,8 @@ def check_mirror(d):
     # rule 3: it is the candidate speaking
     if sent and not re.search(r"\b(I|I've|I'm|my|me)\b", sent):
         p.append("the_honest_sentence is not in the candidate's first-person voice (rule 3)")
+    p += check_pronouns(d, ("which_role_you_are", "evidence_you_fit", "evidence_you_dont",
+                            "what_to_ask_before_applying", "why"), "should_i_apply")
     return p
 
 
@@ -638,6 +726,9 @@ def check_fit(d):
     for i, q in enumerate(d.get("questions_for_this_person") or []):
         if not isinstance(q, dict) or not q.get("question") or not q.get("why_this_person"):
             p.append(f"questions_for_this_person[{i}] needs question + why_this_person (rule 7)")
+    p += check_pronouns(d, ("evidence_for", "evidence_against", "gaps", "over_claim_signals",
+                            "under_claim_signals", "questions_for_this_person", "honesty_note",
+                            "sentence_for_the_client"), "fit_score")
     return p
 
 
@@ -725,7 +816,7 @@ def decode(jd_text, model=DEFAULT_MODEL, votes=DEFAULT_VOTES):
     return out
 
 
-def check_schema(d):
+def check_schema(d, analysis_only=False):
     p = []
 
     def req(cond, msg):
@@ -757,6 +848,16 @@ def check_schema(d):
     req(not hits, f"person_portrait uses gendered pronouns: {hits} (rule 7: they/them only)")
 
     # rule 5 -- ten-minute questions
+    # The paste path runs the analysis pass alone; it should be able to validate that,
+    # rather than being told it failed three checks the compose pass hasn't run yet.
+    if analysis_only:
+        sn = d.get("sanity", {})
+        req(sn.get("verdict") in VERDICTS, f"sanity.verdict must be one of {sorted(VERDICTS)}")
+        req(isinstance(sn.get("problems"), list) and sn.get("problems"), "sanity.problems must be non-empty")
+        req(isinstance(sn.get("questions_to_ask_the_client"), list) and
+            sn.get("questions_to_ask_the_client"), "sanity.questions_to_ask_the_client must be non-empty")
+        return p
+
     tt = d.get("how_to_tell_in_ten_minutes")
     req(isinstance(tt, list) and len(tt) >= 3, "how_to_tell_in_ten_minutes needs >= 3 questions")
     gated = 0
@@ -916,18 +1017,35 @@ def main():
             return 1
     elif cmd == "check":
         d = json.load(open(path))
-        probs = check_schema(d)
-        label = "SCHEMA"
-        if len(sys.argv) > 3:
-            probs += check_expected(d, json.load(open(sys.argv[3]))); label = "SCHEMA+EXPECTED"
+        # auto-detect an analysis-only object (the paste path's pass-1 output)
+        analysis_only = ("--analysis" in sys.argv or
+                         ("how_to_tell_in_ten_minutes" not in d and "fix" not in d.get("sanity", {})))
+        if "notable_repos" in d or d.get("facts") or d.get("error"):
+            probs, label = check_receipts(d), "RECEIPTS"
+        elif "the_honest_sentence" in d:
+            probs, label = check_mirror(d), "SHOULD_I_APPLY"
+        elif "sentence_for_the_client" in d:
+            probs, label = check_fit(d), "FIT_SCORE"
+        elif "per_market" in d:
+            probs, label = check_search(d), "SOURCING_KIT"
+        else:
+            probs = check_schema(d, analysis_only)
+            label = "SCHEMA (analysis only)" if analysis_only else "SCHEMA"
+        if len(sys.argv) > 3 and sys.argv[3].endswith(".json"):
+            probs += check_expected(d, json.load(open(sys.argv[3]))); label += "+EXPECTED"
         if probs:
             print(f"FAIL ({label}):")
             for x in probs: print("  -", x)
             return 1
         m = d.get("_meta", {})
         flag = "" if m.get("unanimous_roles", True) else f"  [split vote {m.get('role_counts')}]"
-        print(f"PASS ({label}) — {len(d['roles_bundled'])} roles, "
-              f"verdict={d['sanity']['verdict']}, fix={len(d['sanity']['fix'].split())} words{flag}")
+        if "roles_bundled" in d:
+            fix = d.get("sanity", {}).get("fix")
+            tail = f", fix={len(fix.split())} words" if fix else ""
+            print(f"PASS ({label}) — {len(d['roles_bundled'])} roles, "
+                  f"verdict={d['sanity']['verdict']}{tail}{flag}")
+        else:
+            print(f"PASS ({label})")
     elif cmd == "render":
         print(render(json.load(open(path))))
     else:

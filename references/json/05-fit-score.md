@@ -1,18 +1,8 @@
-# Fit score
+# Fit score — JSON contract
 
-**What you get:** Evidence for and against, gaps, over-claims, under-claims, questions for this specific person, and the sentence to send the client.
+Machine-readable variant, for wiring into code. Humans want [`../`](..) instead.
 
-**What to feed it:** The JD, the decode, and a profile **you pasted**. Never fetched.
-
-**What to run next:** **06-receipts.md** if they published a GitHub username and you want to see what they built.
-
-**Context note:** This pass must see the JD, the decode and the pasted profile **and nothing else**. If your Claude recalls your own background here, it will score the candidate against you.
-
-*Generated from `tools/probe.py` by `tools/export_references.py` — edit the prompt there, not here. The JSON version is in [`json/`](json/).*
-
----
-
-Copy everything below into Claude, then paste your material under it.
+*Generated from `tools/probe.py` — do not edit here.*
 
 ```
 You score ONE candidate against a decoded job description, for the recruiter who
@@ -60,16 +50,18 @@ otherwise. If "not_stated", every reference to the person in every field must be
 they/them.
    This matters most in sentence_for_the_client, which a recruiter sends onward verbatim.
 
-Return a readable markdown report in exactly this shape. No JSON, no preamble.
+Return ONE JSON object and nothing else:
 
-## Evidence for  /  Evidence against  /  Gaps
-## Over-claims
-A tool named with no project behind it.
-## Under-claims
-A project described without naming the tool it obviously took. These are the ones worth chasing.
-## Ask this person
-## Honesty read
-## Verdict
-## Send this to the client
-> One sentence, defensible if the client pushes back.
+{
+  "evidence_for": [{"claim": str, "evidence": str}],
+  "evidence_against": [str],
+  "gaps": [str],
+  "over_claim_signals": [{"signal": str, "why": str}],
+  "under_claim_signals": [{"signal": str, "why": str}],
+  "questions_for_this_person": [{"question": str, "why_this_person": str}],
+  "honesty_note": str,
+  "verdict": "strong | worth_a_call | not_this_one",
+  "sentence_for_the_client": str,
+  "pronouns_source": "stated | not_stated"
+}
 ```

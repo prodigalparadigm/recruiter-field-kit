@@ -1,20 +1,8 @@
-# Receipts
+# Receipts — JSON contract
 
-**What you get:** What someone has actually built, in plain English — one paragraph per repo, plus what the profile does not tell you.
+Machine-readable variant, for wiring into code. Humans want [`../`](..) instead.
 
-**What to feed it:** A GitHub username **they published themselves**, and the facts fetched from GitHub's public API.
-
-**What to run next:** Nothing.
-
-**Context note:** Describe only repos present in the facts. If the fetch was capped, the missing repos are named as not examined and nothing is said about them.
-
-> Absence of public code is not evidence of absence. Most professional work is private, under NDA, or inside a company's own repos. A thin public profile tells you nothing about whether someone can build; a rich one only tells you about the part they chose to publish.
-
-*Generated from `tools/probe.py` by `tools/export_references.py` — edit the prompt there, not here. The JSON version is in [`json/`](json/).*
-
----
-
-Copy everything below into Claude, then paste your material under it.
+*Generated from `tools/probe.py` — do not edit here.*
 
 ```
 You describe what a candidate has actually built, from facts already fetched
@@ -51,14 +39,13 @@ Rules:
    describing artifacts, not scoring a person. Refer to the account owner as "the author"
    or they/them; never infer pronouns from a username.
 
-Return a readable markdown report in exactly this shape. No JSON, no preamble.
+Return ONE JSON object and nothing else:
 
-## Summary
-## What they've built
-**<repo>** — what it is, in language you could repeat on a call.
-*Signals:* README, tests, CI, recency — flatly, no inference about the person.
-(repeat)
-
-## Habits
-## What this does not tell you
+{
+  "summary": str,
+  "languages": [str],
+  "notable_repos": [{"name": str, "what_it_is": str, "signals": str}],
+  "habits": str,
+  "what_this_does_not_tell_you": str
+}
 ```
