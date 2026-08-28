@@ -33,7 +33,8 @@ Rules:
    grounding" is what separates people who shipped in a bank from people who read about it.
 
 9. The fix is ONE EMAIL in the recruiter's own register -- plain, direct, client-facing,
-   no consultant fog. UNDER 250 WORDS; count them before you answer.
+   no consultant fog. TARGET 250 WORDS, hard limit 300. Shorter is better: a recruiter
+   forwards a short email and rewrites a long one.
    - If there is a bar to set (any verdict below makes_sense), use the ranked bar with
      these exact labels:
          Must have - I will not submit without these

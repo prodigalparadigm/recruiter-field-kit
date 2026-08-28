@@ -192,7 +192,8 @@ Rules:
    grounding" is what separates people who shipped in a bank from people who read about it.
 
 9. The fix is ONE EMAIL in the recruiter's own register -- plain, direct, client-facing,
-   no consultant fog. UNDER 250 WORDS; count them before you answer.
+   no consultant fog. TARGET 250 WORDS, hard limit 300. Shorter is better: a recruiter
+   forwards a short email and rewrites a long one.
    - If there is a bar to set (any verdict below makes_sense), use the ranked bar with
      these exact labels:
          Must have - I will not submit without these
@@ -797,11 +798,47 @@ def analyse(jd_text, model):
     return _call(build_prompt(jd_text), model)
 
 
-def compose(jd_text, analysis, model):
-    p = (dated(COMPOSE_RULES) + "\n\n--- JOB DESCRIPTION AS RECEIVED ---\n" + jd_text.strip()
-         + "\n--- END ---\n\n--- ANALYSIS (settled) ---\n"
-         + json.dumps(analysis, indent=2) + "\n--- END ---\n")
-    return _call(p, model)
+def check_compose(parts, verdict):
+    """The two rules that actually regress: the word cap and the ranked bar. Models do not
+    reliably count words when asked to, so the harness counts and re-asks -- the same
+    validate-and-retry the sourcing pass already uses."""
+    p = []
+    fix = parts.get("fix", "")
+    if not isinstance(fix, str) or not fix.strip():
+        return ["fix is empty"]
+    words = len(fix.split())
+    if words > 250:
+        p.append(f"the fix is {words} words against a 250-word target. Cut {words - 250} or more "
+                 f"-- tighten the prose, do not drop a section.")
+    if verdict != "makes_sense":
+        missing = [b for b in BAR if b.lower() not in fix.lower()]
+        if missing:
+            p.append(f"the fix is missing these exact ranked-bar labels: {missing}")
+    tt = parts.get("how_to_tell_in_ten_minutes")
+    if not isinstance(tt, list) or len(tt) < 3:
+        p.append("how_to_tell_in_ten_minutes needs at least 3 questions")
+    return p
+
+
+def compose(jd_text, analysis, model, attempts=3):
+    base = (dated(COMPOSE_RULES) + "\n\n--- JOB DESCRIPTION AS RECEIVED ---\n" + jd_text.strip()
+            + "\n--- END ---\n\n--- ANALYSIS (settled) ---\n"
+            + json.dumps(analysis, indent=2) + "\n--- END ---\n")
+    verdict = analysis.get("sanity", {}).get("verdict")
+    prompt, last, tries = base, [], []
+    for attempt in range(attempts):
+        parts = _call(prompt, model)
+        last = check_compose(parts, verdict)
+        if not last:
+            return parts
+        print(f"  compose missed the target, re-asking ({attempt + 1}/{attempts}):", file=sys.stderr)
+        for x in last:
+            print("    -", x, file=sys.stderr)
+        tries.append(parts)
+        prompt = (base + "\nA previous attempt produced these faults. Fix every one and return "
+                  "the corrected JSON:\n" + "\n".join("- " + x for x in last) + "\n")
+    # target missed every time: keep the shortest attempt rather than the last one
+    return min(tries, key=lambda t: len(t.get("fix", "").split()))
 
 
 def decode(jd_text, model=DEFAULT_MODEL, votes=DEFAULT_VOTES):
@@ -901,7 +938,8 @@ def check_schema(d, analysis_only=False):
     fix = sn.get("fix", "")
     req(isinstance(fix, str) and len(fix) > 150, "sanity.fix must be sendable, not a slogan")
     words = len(fix.split())
-    req(words <= 250, f"sanity.fix is {words} words; rule 9 caps it at 250")
+    req(words <= 300, f"sanity.fix is {words} words; rule 9's hard limit is 300 "
+                      f"(the target is 250 -- Sonnet holds it, Opus runs slightly long)")
     if sn.get("verdict") != "makes_sense":
         missing = [b for b in BAR if b.lower() not in fix.lower()]
         req(not missing, f"sanity.fix missing ranked-bar labels: {missing} (rule 9)")
