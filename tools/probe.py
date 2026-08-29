@@ -359,6 +359,11 @@ def check_search(sr):
             p.append(f"{tag}.where_else empty (rule 7)")
     if len(pm) > 1 and not sr.get("fill_first"):
         p.append("multiple markets but no fill_first (rule 1)")
+    # exactly one market is the core: flagging both tells the recruiter nothing about
+    # which search to run first, which is the whole point of splitting them
+    cores = sum(1 for m in pm if m.get("is_core"))
+    if cores != 1:
+        p.append(f"{cores} markets flagged is_core; exactly one must be (rule 1)")
     if not sr.get("warnings"):
         p.append("warnings empty -- the commercial-use limit note is required (rule 4)")
     return p
