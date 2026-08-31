@@ -126,8 +126,8 @@ parse wastes a search you can't get back.
 
 ## What this is calibrated against
 
-The decode is tuned to **one practitioner's judgment** — an AI
-adoption consultant who rated ten real job descriptions before seeing the tool's answers.
+The decode is tuned to **one practitioner's judgment** — an AI adoption consultant who
+rated ten real job descriptions before seeing the tool's answers.
 On role counts it agrees with that reading 8 times out of 10, up from 2 out of 6 when the
 comparison started.
 
