@@ -133,7 +133,7 @@ comparison started.
 
 That is worth stating plainly rather than implying general calibration it doesn't have.
 Every house rule below came out of a disagreement with that reader, which means the rules
-encode how one experienced recruiter reads a req — not a consensus, and not a survey. If
+encode how one experienced practitioner reads a req — not a consensus, and not a survey. If
 your read differs, the rules are in `tools/probe.py` in plain English and the fixtures are
 in `tests/`; disagreeing with them is a matter of editing a paragraph and a sidecar.
 
