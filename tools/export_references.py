@@ -24,6 +24,7 @@ HERE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "reference
 GPT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..",
                    "distribution", "custom-gpt", "knowledge")
 ONE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "distribution", "one-paste")
+WEB = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "distribution", "web")
 
 # (file, title, rules, gives, feed, next_step, context, report)
 PASSES = [
@@ -146,6 +147,11 @@ A project described without naming the tool it obviously took. These are the one
 ]
 
 
+_DATE_LINE = ("Establish today's date before you begin, and state it. Several rules below turn on "
+              "how long a technology has existed or whether a date is past or future, and guessing the "
+              "date from memory gets those wrong. If you cannot establish it, ask.")
+
+
 def human(title, rules, gives, feed, nxt, context, report):
     body = rules.split(SPLIT)[0].rstrip()
     return (f"# {title}\n\n"
@@ -224,12 +230,44 @@ def one_paste():
             + REPORT + "```\n")
 
 
+def web_page():
+    """The shareable one-link page. Layout lives in template.html; the three prompts are
+    filled from probe.py so the page cannot drift from the rules it hands people."""
+    import html as _h, re as _re
+    tpl = open(os.path.join(WEB, "template.html")).read()
+    tpl = _re.sub(r"^<!--.*?-->\n", "", tpl, count=1, flags=_re.S)
+    # Use the SAME fenced body the human reference files carry -- raw rules alone would
+    # drop the date line and the markdown report spec, and the page would hand people a
+    # prompt that produces unformatted output.
+    by_file = {fn: (rules, report) for fn, _t, rules, _g, _f, _n, _c, report in PASSES}
+    def fenced(fn):
+        rules, report = by_file[fn]
+        return (_DATE_LINE + "\n\n" + rules.split(SPLIT)[0].rstrip()
+                + "\n\nReturn a readable markdown report in exactly this shape. "
+                  "No JSON, no preamble.\n\n" + report)
+    parts = {
+        "DECODE": one_paste().split("```")[1].strip(),
+        "SOURCE": fenced("03-sourcing-kit.md"),
+        "FIT":    fenced("05-fit-score.md"),
+    }
+    for k, v in parts.items():
+        tpl = tpl.replace("{{%s}}" % k, _h.escape(v))
+    return tpl
+
+
 def main():
     check = "--check" in sys.argv
     os.makedirs(os.path.join(HERE, "json"), exist_ok=True)
     os.makedirs(GPT, exist_ok=True)
     os.makedirs(ONE, exist_ok=True)
     stale = []
+    wp = os.path.join(WEB, "index.html")
+    want_web = web_page()
+    if (open(wp).read() if os.path.exists(wp) else None) != want_web:
+        stale.append("distribution/web/index.html")
+        if not check:
+            open(wp, "w").write(want_web)
+
     op = os.path.join(ONE, "PROMPT.md")
     want_one = one_paste()
     if (open(op).read() if os.path.exists(op) else None) != want_one:
@@ -250,9 +288,9 @@ def main():
             print("FAIL: references/ is stale, re-run tools/export_references.py:")
             for f in stale: print("  -", f)
             return 1
-        print(f"PASS: prompts in sync across all surfaces ({len(PASSES) * 3 + 1} files).")
+        print(f"PASS: prompts in sync across all surfaces ({len(PASSES) * 3 + 2} files).")
     else:
-        print(f"wrote {len(PASSES) * 3 + 1} files" + (f" ({len(stale)} changed)" if stale else ""))
+        print(f"wrote {len(PASSES) * 3 + 2} files" + (f" ({len(stale)} changed)" if stale else ""))
     return 0
 
 

@@ -1,0 +1,138 @@
+<!-- Generated into index.html by tools/export_references.py.
+     Edit this template for layout; edit tools/probe.py for the prompts. -->
+<title>The Recruiter's Field Kit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400&display=swap">
+<style>
+  :root{
+    --paper:#f4f5f7; --card:#fff; --ink:#14161a; --body:#33383f; --muted:#6a7078;
+    --rule:#dcdfe4; --rule-soft:#e8eaee; --mark:#ab241d; --mark-soft:#fbeceb;
+    --mark-line:#e8b3ae; --code:#f7f8f9;
+  }
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+    --paper:#0f1113; --card:#171a1e; --ink:#eef0f3; --body:#c5cbd2; --muted:#8b929b;
+    --rule:#2a2f35; --rule-soft:#1f2429; --mark:#e8756a; --mark-soft:#2a1614;
+    --mark-line:#5c2b26; --code:#14171a; } }
+  :root[data-theme="dark"]{
+    --paper:#0f1113; --card:#171a1e; --ink:#eef0f3; --body:#c5cbd2; --muted:#8b929b;
+    --rule:#2a2f35; --rule-soft:#1f2429; --mark:#e8756a; --mark-soft:#2a1614;
+    --mark-line:#5c2b26; --code:#14171a; }
+
+  *{box-sizing:border-box}
+  body{background:var(--paper); color:var(--body); margin:0; padding:2.2rem 1.15rem 4rem;
+    font-family:"Source Serif 4",Georgia,serif; font-size:17.5px; line-height:1.6;
+    -webkit-font-smoothing:antialiased}
+  .wrap{max-width:36rem; margin:0 auto; display:flex; flex-direction:column; gap:2.4rem}
+  h1{font-family:Archivo,"Helvetica Neue",Arial,sans-serif; font-weight:700; color:var(--ink);
+    font-size:clamp(2rem,7.5vw,2.7rem); line-height:1.03; letter-spacing:-.025em;
+    margin:.3rem 0 0; text-wrap:balance}
+  h2{font-family:Archivo,sans-serif; font-weight:600; font-size:1.28rem; color:var(--ink);
+    margin:.5rem 0 0; letter-spacing:-.012em; text-wrap:balance}
+  .kicker{font-family:Archivo,sans-serif; font-weight:600; font-size:.7rem; letter-spacing:.16em;
+    text-transform:uppercase; color:var(--mark); margin:0}
+  .lede{font-size:1.08rem; margin:.75rem 0 0}
+  p{margin:0} strong{color:var(--ink); font-weight:600}
+  hr{border:0; border-top:1px solid var(--rule-soft); margin:0}
+  section{display:flex; flex-direction:column; gap:.75rem}
+
+  .step{display:flex; flex-direction:column; gap:.55rem;
+    padding-bottom:2.1rem; border-bottom:1px solid var(--rule-soft)}
+  .step:last-of-type{border-bottom:0; padding-bottom:0}
+  .tag{display:flex; align-items:baseline; gap:.6rem}
+  .ord{font-family:Archivo,sans-serif; font-weight:700; font-size:.95rem; color:var(--mark)}
+  .when{font-family:Archivo,sans-serif; font-weight:600; font-size:.68rem; letter-spacing:.13em;
+    text-transform:uppercase; color:var(--muted)}
+  .what{font-size:.99rem}
+  .tip{font-size:.9rem; color:var(--muted)}
+
+  .box{background:var(--card); border:1px solid var(--rule); border-radius:3px; overflow:hidden;
+    box-shadow:0 1px 2px rgba(20,22,26,.04), 0 10px 30px -22px rgba(20,22,26,.4); margin-top:.3rem}
+  .box .top{display:flex; align-items:center; justify-content:space-between; gap:1rem;
+    padding:.8rem 1rem; border-bottom:1px solid var(--rule)}
+  .box .top p{font-family:Archivo,sans-serif; font-size:.82rem; font-weight:600; color:var(--ink)}
+  button.copy{font-family:Archivo,sans-serif; font-size:.82rem; font-weight:700; cursor:pointer;
+    background:var(--mark); color:#fff; border:1px solid var(--mark); padding:.45rem 1.05rem;
+    border-radius:3px; white-space:nowrap}
+  button.copy:hover{filter:brightness(1.08)}
+  button.copy:focus-visible{outline:2px solid var(--mark); outline-offset:2px}
+  pre{margin:0; padding:.85rem 1rem; background:var(--code); color:var(--muted);
+    font-family:"JetBrains Mono",ui-monospace,monospace; font-size:.68rem; line-height:1.55;
+    max-height:9rem; overflow:auto; white-space:pre-wrap; word-break:break-word}
+
+  .boundary{background:var(--mark-soft); border:1px solid var(--mark-line); border-radius:3px;
+    padding:.95rem 1.1rem; display:flex; flex-direction:column; gap:.5rem}
+  .byline{border-top:1px solid var(--rule); padding-top:1.3rem; font-size:.9rem; color:var(--muted)}
+  .byline a{color:var(--mark)}
+</style>
+
+<div class="wrap">
+  <header>
+    <p class="kicker">Fieldwork · Prodigal Paradigm</p>
+    <h1>Most AI-era reqs are more than one job.</h1>
+    <p class="lede">Bundled into one seat, at a rate that prices one of them. Three tools to find out — decode the req, get the searches, score the person — in whatever AI assistant you already use. Free account is fine. Nothing to install.</p>
+  </header>
+
+  <article class="step" id="decode">
+    <div class="tag"><span class="ord">1</span><span class="when">Start here</span></div>
+    <h2>Decode the job description</h2>
+    <p class="what">How many jobs are actually in the req, which labour market each one lives in, who you are looking for, ten-minute screening questions with a real answer and a bluff, and a verdict with an email you can send the client.</p>
+    <div class="box">
+      <div class="top"><p>The decoder</p><button class="copy" data-t="decode-c">Copy</button></div>
+      <pre id="decode-c">{{DECODE}}</pre>
+    </div>
+    <p class="tip">Paste this into any AI assistant, then paste the job description underneath it in the same message.</p>
+  </article>
+  <article class="step" id="source">
+    <div class="tag"><span class="ord">2</span><span class="when">Same chat, after the decode</span></div>
+    <h2>Get the searches</h2>
+    <p class="what">One Boolean string per labour market — tight, wide, and an exclusion clause — plus x-ray strings for a free account, what the same person is called at an enterprise versus a startup, and where these people are besides a profile search.</p>
+    <div class="box">
+      <div class="top"><p>The sourcing kit</p><button class="copy" data-t="source-c">Copy</button></div>
+      <pre id="source-c">{{SOURCE}}</pre>
+    </div>
+    <p class="tip">Paste this into the same conversation. It reads the decode you just got. You run the searches yourself — it never touches LinkedIn.</p>
+  </article>
+  <article class="step" id="fit">
+    <div class="tag"><span class="ord">3</span><span class="when">Same chat, when you have someone</span></div>
+    <h2>Score a candidate</h2>
+    <p class="what">Evidence for and against, real gaps versus imaginary ones, over-claims (a tool named with no project behind it), under-claims (a project described without naming the tool — the ones worth chasing), questions for this specific person, and the sentence to send the client.</p>
+    <div class="box">
+      <div class="top"><p>The fit score</p><button class="copy" data-t="fit-c">Copy</button></div>
+      <pre id="fit-c">{{FIT}}</pre>
+    </div>
+    <p class="tip">Paste this, then paste the candidate's CV or profile underneath. Their copy, your keystrokes — it never fetches anyone.</p>
+  </article>
+
+  <hr>
+
+  <section>
+    <div class="boundary">
+      <p class="kicker">What it will not do</p>
+      <p>It never touches LinkedIn and never looks anyone up. It writes the search string; <strong>you</strong> run the search. Candidate profiles are pasted by you, never fetched. That is a line the kit does not cross, and it will say so if you ask it to.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>A note on the fourth tool</h2>
+    <p class="what">There is a fourth pass — <strong>receipts</strong>, which reads what a candidate has actually built from their public GitHub. It is not here, because it has to fetch real data and this page will not fetch anything. It lives in the repo for anyone who wants to run it themselves.</p>
+  </section>
+
+  <p class="byline">Part of Prodigal Paradigm's Fieldwork suite. Built with Claude, runs in whatever assistant you already have. Open source, MIT — <a href="https://github.com/prodigalparadigm/recruiter-field-kit">github.com/prodigalparadigm/recruiter-field-kit</a>. Free to use and free to pass on.</p>
+</div>
+
+<script>
+  document.querySelectorAll("button.copy").forEach(function(b){
+    b.addEventListener("click", function(){
+      var el=document.getElementById(b.dataset.t), txt=el.innerText;
+      function flash(m,ms){ b.textContent=m; setTimeout(function(){b.textContent="Copy";}, ms||1500); }
+      function fallback(){
+        var r=document.createRange(); r.selectNodeContents(el);
+        var s=window.getSelection(); s.removeAllRanges(); s.addRange(r);
+        flash("Selected \u2014 \u2318C", 2400);
+      }
+      try{ navigator.clipboard.writeText(txt).then(function(){flash("Copied");}, fallback); }
+      catch(e){ fallback(); }
+    });
+  });
+</script>
